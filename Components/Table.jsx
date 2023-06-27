@@ -26,9 +26,9 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
               <th className="py-3 px-6">Fecha ensamblaje</th>
               <th className="py-3 px-6">DDR</th>
               <th className="py-3 px-6">Precio</th>
-              <th className="py-3 px-6">Fecha programado</th>
+              {/* <th className="py-3 px-6">Fecha programado</th>
               <th className="py-3 px-6">Fecha empaquetado</th>
-              <th className="py-3 px-6">Fecha pruebas</th>
+              <th className="py-3 px-6">Fecha pruebas</th> */}
               <th className="py-3 px-6">Fecha envio</th>
               {/* <th className="py-3 px-6">Fecha final</th> */}
               <th className="py-3 px-6">Pago</th>
@@ -57,7 +57,7 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   {ram.precio}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
+                {/* <td className="px-6 py-4 whitespace-nowrap">
                   {converTime(ram.fechaProgramado)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -65,7 +65,7 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {converTime(ram.fechaEmpaque)}
-                </td>
+                </td> */}
                 <td className="px-6 py-4 whitespace-nowrap">
                   {converTime(ram.fechaEnvio)}
                 </td>

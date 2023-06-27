@@ -13,10 +13,10 @@ contract Tracking {
         uint256 precio;
         RamStatus status;
         bool isPaid;
-        uint256 fechaProgramado;
-        uint256 fechaPrueba;
-        uint256 fechaEmpaque;
-        uint256 fechaFinal;
+        // uint256 fechaProgramado;
+        // uint256 fechaPrueba;
+        // uint256 fechaEmpaque;
+        // uint256 fechaFinal;
         // uint256 capacidad;
     }
 
@@ -32,23 +32,23 @@ contract Tracking {
         uint256 precio;
         RamStatus status;
         bool isPaid;
-        uint256 fechaProgramado;
-        uint256 fechaPrueba;
-        uint256 fechaEmpaque;
-        uint256 fechaFinal;
+        // uint256 fechaProgramado;
+        // uint256 fechaPrueba;
+        // uint256 fechaEmpaque;
+        // uint256 fechaFinal;
         // uint256 capacidad;
     }
 
     TypeRam[] typeRams;
     
-    event RamEnviada(address indexed sender, address indexed receptor, uint256 fechaEnvio);
+    event RamEnviada(address indexed sender, address indexed receptor, uint256 fechaCreacion);
 
     event RamAssembled(address indexed sender, address indexed receptor, uint256 fechaCreacion, uint256 ddr, uint256 precio);
-    event RamProgrammed(address indexed sender, address indexed receptor, uint256 fechaProgramado);
-    event RamTested(address indexed sender, address indexed receptor, uint256 fechaPrueba);
-    event RamPacked(address indexed sender, address indexed receptor, uint256 fechaEmpaque);
-    event RamDelivered(address indexed sender, address indexed receptor, uint256 fechaEnvio);
-    event RamPaid(address indexed sender, address indexed receptor, uint256 amount, uint256 fechaFinal);
+    event RamProgrammed(address indexed sender, address indexed receptor);
+    event RamTested(address indexed sender, address indexed receptor);
+    event RamPacked(address indexed sender, address indexed receptor);
+    event RamDelivered(address indexed sender, address indexed receptor, uint256 fechaFinal);
+    event RamPaid(address indexed sender, address indexed receptor, uint256 amount);
 
     constructor() {
         ramCount = 0;
@@ -57,7 +57,7 @@ contract Tracking {
      function createRam(address _receptor, uint256 _fechaCreacion, uint256 _ddr, uint256 _precio) public payable {
         require(msg.value == _precio, "El monto del pago debe coincidir con el precio.");
         
-        Ram memory ram = Ram(msg.sender, _receptor, _fechaCreacion, 0, _ddr, _precio, RamStatus.ENSAMBLADO, false,0,0,0,0);
+        Ram memory ram = Ram(msg.sender, _receptor, _fechaCreacion, 0, _ddr, _precio, RamStatus.ENSAMBLADO, false);
 
         rams[msg.sender].push(ram);
         ramCount++;
@@ -71,18 +71,14 @@ contract Tracking {
                 _ddr, 
                 _precio, 
                 RamStatus.ENSAMBLADO, 
-                false,
-                0,
-                0,
-                0,
-                0
+                false
             )
         );
         
         emit RamAssembled(msg.sender, _receptor, _fechaCreacion, _ddr, _precio);
     }
 
-    function programmedRam(address _sender, address _receptor, uint256 _fechaProgramado, uint256 _index) public{
+    function programmedRam(address _sender, address _receptor, uint256 _index) public{
         Ram storage ram = rams[_sender][_index];
         TypeRam storage typeRam = typeRams[_index];
 
@@ -91,13 +87,11 @@ contract Tracking {
 
         ram.status = RamStatus.PROGRAMADO;
         typeRam.status = RamStatus.PROGRAMADO;
-        typeRam.fechaProgramado = block.timestamp;
-        ram.fechaProgramado = block.timestamp;
 
-        emit RamProgrammed(_sender, _receptor, _fechaProgramado);
+        emit RamProgrammed(_sender, _receptor);
     }
 
-    function testRam(address _sender, address _receptor, uint256 _fechaPrueba, uint256 _index) public{
+    function testRam(address _sender, address _receptor, uint256 _index) public{
         Ram storage ram = rams[_sender][_index];
         TypeRam storage typeRam = typeRams[_index];
 
@@ -106,13 +100,11 @@ contract Tracking {
 
         ram.status = RamStatus.PROBADO;
         typeRam.status = RamStatus.PROBADO;
-        typeRam.fechaPrueba = block.timestamp;
-        ram.fechaPrueba = block.timestamp;
 
-        emit RamTested(_sender, _receptor, _fechaPrueba);
+        emit RamTested(_sender, _receptor);
     }
 
-    function packedRam(address _sender, address _receptor, uint256 _fechaEmpaque, uint256 _index) public{
+    function packedRam(address _sender, address _receptor, uint256 _index) public{
         Ram storage ram = rams[_sender][_index];
         TypeRam storage typeRam = typeRams[_index];
 
@@ -121,10 +113,8 @@ contract Tracking {
 
         ram.status = RamStatus.EMPACADO;
         typeRam.status = RamStatus.EMPACADO;
-        typeRam.fechaEmpaque = block.timestamp;
-        ram.fechaEmpaque = block.timestamp;
 
-        emit RamPacked(_sender, _receptor, _fechaEmpaque);
+        emit RamPacked(_sender, _receptor);
     }
 
     function startRam(address _sender, address _receptor, uint256 _index) public {
@@ -161,7 +151,7 @@ contract Tracking {
         typeRam.isPaid = true;
 
         emit RamDelivered(_sender, _receptor, ram.fechaEnvio);
-        emit RamPaid(_sender, _receptor, amount, _fechaFinal);
+        emit RamPaid(_sender, _receptor, amount);
     }
 
     function getRam(address _sender, uint256 _index) public view returns (address, address, uint256, uint256, uint256, uint256, RamStatus, bool) {
