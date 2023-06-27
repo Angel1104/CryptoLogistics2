@@ -59,9 +59,15 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
                   {ram.isPaid ? " Completed" : "Not Complete"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {ram.status == 0
+                {ram.status == 0
                     ? "ENSAMBLADO"
                     : ram.status == 1
+                    ? "PROGRAMADO"
+                    : ram.status == 2
+                    ? "PROBADO"
+                    : ram.status == 3
+                    ? "EMPACADO"
+                    : ram.status == 4
                     ? "ENVIADO"
                     : "COMPLETO"}
                 </td>

@@ -24,7 +24,7 @@ const Services = ({
       </div>
       
       <div 
-      onClick={()=>setStartModal(true)}
+      //onClick={()=>setStartModal(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
           <p className="mr-3 text-white">2</p>
@@ -35,10 +35,10 @@ const Services = ({
       </div>
 
       <div 
-      onClick={()=>setStartModal(true)}
+      //onClick={()=>setStartModal(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
-          <p className="mr-3 text-white">2</p>
+          <p className="mr-3 text-white">3</p>
           <button className="text-white">
             Gestion de calidad
           </button>
@@ -46,10 +46,10 @@ const Services = ({
       </div>
 
       <div 
-      onClick={()=>setStartModal(true)}
+      //onClick={()=>setStartModal(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
-          <p className="mr-3 text-white">2</p>
+          <p className="mr-3 text-white">4</p>
           <button className="text-white">
             Empaquetado
           </button>
@@ -60,7 +60,7 @@ const Services = ({
       onClick={()=>setStartModal(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
-          <p className="mr-3 text-white">2</p>
+          <p className="mr-3 text-white">5</p>
           <button className="text-white">
             Iniciar envio
           </button>
@@ -71,7 +71,7 @@ const Services = ({
       onClick={()=>setCompleteModal(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
-          <p className="mr-3 text-white">3</p>
+          <p className="mr-3 text-white">6</p>
           <button className="text-white">
             Proceso final
           </button>
