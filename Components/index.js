@@ -7,6 +7,9 @@ import GetShipment from "./GetShipment";
 import CompleteShipment from "./CompleteShipment";
 import StartShipment from "./StartShipment";
 import Layout from './Layout';
+import ProgrammedRam from './ProgrammedRam';
+import TestRam from './TestRam';
+import PackedRam from './PackedRam';
 //SVG
 import Nav1 from "./SVG/Nav1";
 import Nav2 from "./SVG/Nav2";
@@ -24,6 +27,9 @@ export {
   GetShipment,
   CompleteShipment,
   StartShipment,
+  ProgrammedRam,
+  TestRam,
+  PackedRam,
   Layout,
   //SVG
   Nav1,

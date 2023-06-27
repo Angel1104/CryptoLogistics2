@@ -8,6 +8,9 @@ import {
     CompleteShipment,
     GetShipment,
     StartShipment,
+    ProgrammedRam,
+    TestRam,
+    PackedRam
   } from "../Components/index";
 import { TrackingContext } from "../Conetxt/TrackingContext";
 
@@ -21,6 +24,9 @@ const IniciarProceso = () => {
         getShipment,
         startRam,
         getRamsCount,
+        programmedRam,
+        testRam,
+        packedRam
       } = useContext(TrackingContext);
 
     //STATE VARIABLE
@@ -29,6 +35,9 @@ const IniciarProceso = () => {
   const [startModal, setStartModal] = useState(false);
   const [completeModal, setCompleteModal] = useState(false);
   const [getModel, setGetModel] = useState(false);
+  const [programmedModalRam, setprogrammedModalRam] = useState(false);
+  const [testModalRam, setTestModalRam] = useState(false);
+  const [packedModalRam, setPackedModalRam] = useState(false);
   //DATA STATE VARIABLE
   const [allRamsdata, setallRamsdata] = useState();
 
@@ -49,6 +58,9 @@ const IniciarProceso = () => {
         setCompleteModal={setCompleteModal}
         setStartModal={setStartModal}
         setCreateRamModel={setCreateRamModel}
+        setprogrammedModalRam={setprogrammedModalRam}
+        setTestModalRam= {setTestModalRam}
+        setPackedModalRam={setPackedModalRam}
         />
         <Form
             createRamModel={createRamModel}
@@ -76,6 +88,21 @@ const IniciarProceso = () => {
         setOpenProfile={setOpenProfile}
         currentUser={currentUser}
         getRamsCount={getRamsCount}
+      />
+      <ProgrammedRam
+        programmedModalRam ={programmedModalRam}
+        setprogrammedModalRam={setprogrammedModalRam}
+        programmedRam={programmedRam}
+      />
+      <TestRam
+        testModalRam = {testModalRam}
+        setTestModalRam = {setTestModalRam}
+        testRam={testRam}
+      />
+      <PackedRam
+        packedModalRam={packedModalRam}
+        setPackedModalRam = {setPackedModalRam}
+        packedRam = {packedRam}
       />
     </Layout>
     );

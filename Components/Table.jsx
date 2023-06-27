@@ -13,6 +13,7 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
     return dataTime;
   };
 
+
   console.log(allRamsdata);
   return (
     <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
@@ -22,10 +23,14 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
               <th className="py-3 px-6">ID</th>
               <th className="py-3 px-6">Creador</th>
               <th className="py-3 px-6">Receptor</th>
-              <th className="py-3 px-6">Fecha creacion</th>
+              <th className="py-3 px-6">Fecha ensamblaje</th>
               <th className="py-3 px-6">DDR</th>
               <th className="py-3 px-6">Precio</th>
-              <th className="py-3 px-6">Fecha final</th>
+              <th className="py-3 px-6">Fecha programado</th>
+              <th className="py-3 px-6">Fecha empaquetado</th>
+              <th className="py-3 px-6">Fecha pruebas</th>
+              <th className="py-3 px-6">Fecha envio</th>
+              {/* <th className="py-3 px-6">Fecha final</th> */}
               <th className="py-3 px-6">Pago</th>
               <th className="py-3 px-6">Estado</th>
             </tr>
@@ -53,15 +58,33 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
                   {ram.precio}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
+                  {converTime(ram.fechaProgramado)}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {converTime(ram.fechaPrueba)}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {converTime(ram.fechaEmpaque)}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   {converTime(ram.fechaEnvio)}
                 </td>
+                {/* <td className="px-6 py-4 whitespace-nowrap">
+                  {converTime(ram.fechaFinal)}
+                </td> */}
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {ram.isPaid ? " Completed" : "Not Complete"}
+                  {ram.isPaid ? " Si" : "No"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {ram.status == 0
+                {ram.status == 0
                     ? "ENSAMBLADO"
                     : ram.status == 1
+                    ? "PROGRAMADO"
+                    : ram.status == 2
+                    ? "PROBADO"
+                    : ram.status == 3
+                    ? "EMPACADO"
+                    : ram.status == 4
                     ? "ENVIADO"
                     : "COMPLETO"}
                 </td>

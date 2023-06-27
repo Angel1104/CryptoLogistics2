@@ -60,6 +60,10 @@ export const TrackingProvider = ({ children }) => {
         ddr: ram.ddr.toNumber(),
         isPaid: ram.isPaid,
         status: ram.status,
+        fechaProgramado: ram.fechaProgramado,
+        fechaPrueba : ram.fechaPrueba,
+        fechaEmpaque: ram.fechaEmpaque,
+        fechFinal: ram.fechFinal
       }));
 
       return allRams;
@@ -101,6 +105,105 @@ export const TrackingProvider = ({ children }) => {
       const contract = fetchContract(signer);
 
       const transaction = await contract.completeRam(
+        accounts[0],
+        receptor,
+        index,
+        {
+          gasLimit: 300000,
+        }
+      );
+
+      transaction.wait();
+      console.log(transaction);
+      location.reload();
+    } catch (error) {
+      console.log("wrong completeRam", error);
+    }
+  };
+
+  const programmedRam = async (programmedRamm) => {
+    console.log(programmedRamm);
+
+    const { receptor, index } = programmedRamm;
+    try {
+      if (!window.ethereum) return "Install MetaMask";
+
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchContract(signer);
+
+      const transaction = await contract.programmedRam(
+        accounts[0],
+        receptor,
+        index,
+        {
+          gasLimit: 300000,
+        }
+      );
+
+      transaction.wait();
+      console.log(transaction);
+      location.reload();
+    } catch (error) {
+      console.log("wrong programing Ram", error);
+    }
+  };
+
+  const testRam = async (TestRamm) => {
+    console.log(TestRamm);
+
+    const { receptor, index } = TestRamm;
+    try {
+      if (!window.ethereum) return "Install MetaMask";
+
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchContract(signer);
+
+      const transaction = await contract.testRam(
+        accounts[0],
+        receptor,
+        index,
+        {
+          gasLimit: 300000,
+        }
+      );
+
+      transaction.wait();
+      console.log(transaction);
+      location.reload();
+    } catch (error) {
+      console.log("wrong completeRam", error);
+    }
+  };
+
+  const packedRam = async (packedRamm) => {
+    console.log(packedRamm);
+
+    const { receptor, index } = packedRamm;
+    try {
+      if (!window.ethereum) return "Install MetaMask";
+
+      const accounts = await window.ethereum.request({
+        method: "eth_accounts",
+      });
+      const web3Modal = new Web3Modal();
+      const connection = await web3Modal.connect();
+      const provider = new ethers.providers.Web3Provider(connection);
+      const signer = provider.getSigner();
+      const contract = fetchContract(signer);
+
+      const transaction = await contract.packedRam(
         accounts[0],
         receptor,
         index,
@@ -229,6 +332,9 @@ export const TrackingProvider = ({ children }) => {
         getRamsCount,
         DappName,
         currentUser,
+        programmedRam,
+        testRam,
+        packedRam
       }}
     >
       {children}

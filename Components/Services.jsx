@@ -4,6 +4,9 @@ const Services = ({
   setCompleteModal,
   setStartModal,
   setCreateRamModel,
+  setprogrammedModalRam,
+  setTestModalRam,
+  setPackedModalRam
 }) => {
 
 
@@ -24,7 +27,7 @@ const Services = ({
       </div>
       
       <div 
-      onClick={()=>setStartModal(true)}
+      onClick={()=>setprogrammedModalRam(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
           <p className="mr-3 text-white">2</p>
@@ -35,7 +38,7 @@ const Services = ({
       </div>
 
       <div 
-      onClick={()=>setStartModal(true)}
+      onClick={()=>setTestModalRam(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
           <p className="mr-3 text-white">2</p>
@@ -46,7 +49,7 @@ const Services = ({
       </div>
 
       <div 
-      onClick={()=>setStartModal(true)}
+      onClick={()=>setPackedModalRam(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
           <p className="mr-3 text-white">2</p>
