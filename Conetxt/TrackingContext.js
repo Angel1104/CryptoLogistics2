@@ -87,7 +87,7 @@ export const TrackingProvider = ({ children }) => {
   const completeRam = async (completeRamm) => {
     console.log(completeRamm);
 
-    const { recevier, index } = completeRamm;
+    const { receptor, index } = completeRamm;
     try {
       if (!window.ethereum) return "Install MetaMask";
 
@@ -102,7 +102,7 @@ export const TrackingProvider = ({ children }) => {
 
       const transaction = await contract.completeRam(
         accounts[0],
-        recevier,
+        receptor,
         index,
         {
           gasLimit: 300000,
@@ -130,7 +130,7 @@ export const TrackingProvider = ({ children }) => {
       const contract = fetchContract(provider);
       const ram = await contract.getRam(accounts[0], index * 1);
 
-      const SingleShiplent = {
+      const SingleRam = {
         sender: ram[0],
         receptor: ram[1],
         fechaCreacion: ram[2].toNumber(),
@@ -141,7 +141,7 @@ export const TrackingProvider = ({ children }) => {
         isPaid: ram[7],
       };
 
-      return SingleShiplent;
+      return SingleRam;
     } catch (error) {
       console.log("Sorry no chipment");
     }

@@ -3,41 +3,28 @@ import Layout from '../Components/Layout';
 //INTERNAL IMPORT
 import {
   Table,
-  Form,
-  Services,
-  Profile,
-  CompleteShipment,
   GetShipment,
-  StartShipment,
 } from "../Components/index";
 import { TrackingContext } from "../Conetxt/TrackingContext";
 
 const index = () => {
     const {
-      currentUser,
-      createShipment,
-      getAllShipment,
-      completeShipment,
-      getShipment,
-      startShipment,
-      getShipmentsCount,
+      getAllRam,
+      getRam,
     } = useContext(TrackingContext);
 
   //STATE VARIABLE
-  const [createShipmentModel, setCreateShipmentModel] = useState(false);
-  const [openProfile, setOpenProfile] = useState(false);
-  const [startModal, setStartModal] = useState(false);
-  const [completeModal, setCompleteModal] = useState(false);
+  const [createRamModel, setCreateRamModel] = useState(false);
   const [getModel, setGetModel] = useState(false);
   //DATA STATE VARIABLE
-  const [allShipmentsdata, setallShipmentsdata] = useState();
+  const [allRamsdata, setallRamsdata] = useState();
 
   useEffect(() => {
-    const getCampaignsData = getAllShipment();
+    const getCampaignsData = getAllRam();
 
     return async () => {
       const allData = await getCampaignsData;
-      setallShipmentsdata(allData);
+      setallRamsdata(allData);
     };
   }, []);
 
@@ -50,14 +37,9 @@ const index = () => {
                     <button 
                     onClick={()=>setGetModel(true)}
                     className=" text-center bg-blue-500 hover:bg-blue-600 text-xl text-white px-4 py-3 ">
-                        Conseguir RAM
+                        Informacion de Ram
                     </button>
                 </div>
-                {/* <div>
-                    <button className=" text-center bg-blue-500 hover:bg-blue-600 text-xl text-white px-4 py-3 ">
-                        Contador de RAM
-                    </button>
-                </div> */}
             </div>
             <div className="flex items-center justify-end mt-9">
                 <input
@@ -70,13 +52,13 @@ const index = () => {
                 </button>
             </div>
             <Table
-                setCreateShipmentModel={setCreateShipmentModel}
-                allShipmentsdata={allShipmentsdata}
+                setCreateRamModel={setCreateRamModel}
+                allRamsdata={allRamsdata}
             />
             <GetShipment
               getModel={getModel}
               setGetModel={setGetModel}
-              getShipment={getShipment}
+              getRam={getRam}
             />
         </Layout>
     </div>

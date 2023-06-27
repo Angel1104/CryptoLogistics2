@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import Layout from '../Components/Layout';
 
 import {
-    Table,
     Form,
     Services,
     Profile,
@@ -16,29 +15,29 @@ const IniciarProceso = () => {
 
     const {
         currentUser,
-        createShipment,
-        getAllShipment,
-        completeShipment,
+        createRam,
+        getAllRam,
+        completeRam,
         getShipment,
-        startShipment,
-        getShipmentsCount,
+        startRam,
+        getRamsCount,
       } = useContext(TrackingContext);
 
     //STATE VARIABLE
-  const [createShipmentModel, setCreateShipmentModel] = useState(false);
+  const [createRamModel, setCreateRamModel] = useState(false);
   const [openProfile, setOpenProfile] = useState(false);
   const [startModal, setStartModal] = useState(false);
   const [completeModal, setCompleteModal] = useState(false);
   const [getModel, setGetModel] = useState(false);
   //DATA STATE VARIABLE
-  const [allShipmentsdata, setallShipmentsdata] = useState();
+  const [allRamsdata, setallRamsdata] = useState();
 
   useEffect(() => {
-    const getCampaignsData = getAllShipment();
+    const getCampaignsData = getAllRam();
 
     return async () => {
       const allData = await getCampaignsData;
-      setallShipmentsdata(allData);
+      setallRamsdata(allData);
     };
   }, []);
 
@@ -49,18 +48,18 @@ const IniciarProceso = () => {
         <Services
         setCompleteModal={setCompleteModal}
         setStartModal={setStartModal}
-        setCreateShipmentModel={setCreateShipmentModel}
+        setCreateRamModel={setCreateRamModel}
         />
         <Form
-            createShipmentModel={createShipmentModel}
-            createShipment={createShipment}
-            setCreateShipmentModel={setCreateShipmentModel}
+            createRamModel={createRamModel}
+            createRam={createRam}
+            setCreateRamModel={setCreateRamModel}
         />
         
         <CompleteShipment
         completeModal={completeModal}
         setCompleteModal={setCompleteModal}
-        completeShipment={completeShipment}
+        completeRam={completeRam}
       />
         <GetShipment
         getModel={getModel}
@@ -70,13 +69,13 @@ const IniciarProceso = () => {
         <StartShipment
         startModal={startModal}
         setStartModal={setStartModal}
-        startShipment={startShipment}
+        startRam={startRam}
       />
         <Profile
         openProfile={openProfile}
         setOpenProfile={setOpenProfile}
         currentUser={currentUser}
-        getShipmentsCount={getShipmentsCount}
+        getRamsCount={getRamsCount}
       />
     </Layout>
     );

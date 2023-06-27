@@ -1,36 +1,36 @@
 import { useState } from "react";
 
 export default ({
-  setCreateShipmentModel,
-  createShipmentModel,
-  createShipment,
+  setCreateRamModel,
+  createRamModel,
+  createRam,
 }) => {
-  const [shipment, setShipment] = useState({
-    receiver: "",
-    pickupTime: "",
-    distance: "",
-    price: "",
+  const [ram, setRam] = useState({
+    receptor: "",
+    fechaCreacion: "",
+    ddr: "",
+    precio: "",
   });
 
   const createItem = async () => {
     try {
-      await createShipment(shipment);
+      await createRam(ram);
     } catch (error) {
       console.log("Wrong creating item");
     }
   };
-  return createShipmentModel ? (
+  return createRamModel ? (
     <div className="fixed inset-0 z-10 overflow-y-auto">
       <div
         className="fixed inset-0 w-full h-full bg-black opacity-40"
-        onClick={() => setCreateShipmentModel(false)}
+        onClick={() => setCreateRamModel(false)}
       ></div>
       <div className="flex items-center min-h-screen px-4 py-8">
         <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
           <div className="flex justify-end">
             <button
               className="p-2 text-gray-400 rounded-md hover:bg-gray-100"
-              onClick={() => setCreateShipmentModel(false)}
+              onClick={() => setCreateRamModel(false)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ export default ({
           </div>
           <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
             <h4 className="text-lg font-medium text-gray-800">
-              Crear RAM
+              Ensamblar RAM
             </h4>
             <p className="text-[15px] text-gray-600">
               Ingrese los datos revisandolos detalladamente
@@ -57,12 +57,12 @@ export default ({
               <div className="relative mt-3">
                 <input
                   type="text"
-                  placeholder="receiver"
+                  placeholder="receptor"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                   onChange={(e) =>
-                    setShipment({
-                      ...shipment,
-                      receiver: e.target.value,
+                    setRam({
+                      ...ram,
+                      receptor: e.target.value,
                     })
                   }
                 />
@@ -73,9 +73,9 @@ export default ({
                   placeholder="fecha"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                   onChange={(e) =>
-                    setShipment({
-                      ...shipment,
-                      pickupTime: e.target.value,
+                    setRam({
+                      ...ram,
+                      fechaCreacion: e.target.value,
                     })
                   }
                 />
@@ -83,12 +83,12 @@ export default ({
               <div className="relative mt-3">
                 <input
                   type="text"
-                  placeholder="almacenamiento"
+                  placeholder="DDR"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                   onChange={(e) =>
-                    setShipment({
-                      ...shipment,
-                      distance: e.target.value,
+                    setRam({
+                      ...ram,
+                      ddr: e.target.value,
                     })
                   }
                 />
@@ -99,9 +99,9 @@ export default ({
                   placeholder="precio"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                   onChange={(e) =>
-                    setShipment({
-                      ...shipment,
-                      price: e.target.value,
+                    setRam({
+                      ...ram,
+                      precio: e.target.value,
                     })
                   }
                 />
@@ -111,7 +111,7 @@ export default ({
                 onClick={() => createItem()}
                 className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg ring-offset-2 ring-indigo-600 focus:ring-2"
               >
-                Crear RAM
+                Ensamblar RAM
               </button>
             </form>
           </div>
