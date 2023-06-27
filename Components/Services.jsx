@@ -19,35 +19,62 @@ const Services = ({
           <button 
             className="text-white"
           >
-            Crear RAM
+            Ensamblaje
           </button>
         </div>
       </div>
+      
       <div 
       onClick={()=>setStartModal(true)}
-      className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 ml-5">
+      className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
           <p className="mr-3 text-white">2</p>
           <button className="text-white">
-            Iniciar envio de RAM
+            Programacion
           </button>
         </div>
       </div>
-      {/* <div className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70">
+
+      <div 
+      onClick={()=>setStartModal(true)}
+      className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
-          <p className="mr-3 text-white">3</p>
+          <p className="mr-3 text-white">2</p>
           <button className="text-white">
-            Enviar RAM
+            Gestion de calidad
           </button>
         </div>
-      </div> */}
+      </div>
+
+      <div 
+      onClick={()=>setStartModal(true)}
+      className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
+        <div className="flex justify-center items-center h-screen">
+          <p className="mr-3 text-white">2</p>
+          <button className="text-white">
+            Empaquetado
+          </button>
+        </div>
+      </div>
+
+      <div 
+      onClick={()=>setStartModal(true)}
+      className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
+        <div className="flex justify-center items-center h-screen">
+          <p className="mr-3 text-white">2</p>
+          <button className="text-white">
+            Iniciar envio
+          </button>
+        </div>
+      </div>
+      
       <div 
       onClick={()=>setCompleteModal(true)}
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5">
         <div className="flex justify-center items-center h-screen">
           <p className="mr-3 text-white">3</p>
           <button className="text-white">
-            Envio Completado
+            Proceso final
           </button>
         </div>
       </div>
