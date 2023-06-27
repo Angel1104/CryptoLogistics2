@@ -2,122 +2,134 @@
 pragma solidity ^0.8.0;
 
 contract Tracking {
-    enum ShipmentStatus { PENDING, IN_TRANSIT, DELIVERED }
+    enum RamStatus { ENSAMBLADO, ENVIADO, COMPLETO, PROGRAMADO, PROBADO, EMPACADO }
 
-    struct Shipment {
+    struct Ram {
         address sender;
-        address receiver;
-        uint256 pickupTime;
-        uint256 deliveryTime;
-        uint256 distance;
-        uint256 price;
-        ShipmentStatus status;
+        address receptor;
+        uint256 fechaCreacion;
+        uint256 fechaEnvio;
+        uint256 ddr;
+        uint256 precio;
+        RamStatus status;
         bool isPaid;
+        // uint256 fechaProgramado;
+        // uint256 fechaPrueba;
+        // uint256 fechaEmpaque;
+        // uint256 fechaFinal;
+        // uint256 capacidad;
+        // uint256 fecuencia;
     }
 
-    mapping(address => Shipment[]) public shipments;
-    uint256 public shipmentCount;
+    mapping(address => Ram[]) public rams;
+    uint256 public ramCount;
 
-     struct TyepShipment {
+     struct TypeRam {
         address sender;
-        address receiver;
-        uint256 pickupTime;
-        uint256 deliveryTime;
-        uint256 distance;
-        uint256 price;
-        ShipmentStatus status;
+        address receptor;
+        uint256 fechaCreacion;
+        uint256 fechaEnvio;
+        uint256 ddr;
+        uint256 precio;
+        RamStatus status;
         bool isPaid;
+        // uint256 fechaProgramado;
+        // uint256 fechaPrueba;
+        // uint256 fechaEmpaque;
+        // uint256 fechaFinal;
+        // uint256 capacidad;
+        // uint256 fecuencia;
     }
 
-    TyepShipment[] tyepShipments;
+    TypeRam[] typeRams;
     
 
-    event ShipmentCreated(address indexed sender, address indexed receiver, uint256 pickupTime, uint256 distance, uint256 price);
-    event ShipmentInTransit(address indexed sender, address indexed receiver, uint256 pickupTime);
-    event ShipmentDelivered(address indexed sender, address indexed receiver, uint256 deliveryTime);
-    event ShipmentPaid(address indexed sender, address indexed receiver, uint256 amount);
+    event RamCreated(address indexed sender, address indexed receptor, uint256 fechaCreacion, uint256 ddr, uint256 precio);
+    event RamInTransit(address indexed sender, address indexed receptor, uint256 fechaCreacion);
+    event RamDelivered(address indexed sender, address indexed receptor, uint256 fechaEnvio);
+    event RamPaid(address indexed sender, address indexed receptor, uint256 amount);
 
     constructor() {
-        shipmentCount = 0;
+        ramCount = 0;
     }
 
-     function createShipment(address _receiver, uint256 _pickupTime, uint256 _distance, uint256 _price) public payable {
-        require(msg.value == _price, "Payment amount must match the price.");
+     function createRam(address _receptor, uint256 _fechaCreacion, uint256 _ddr, uint256 _precio) public payable {
+        require(msg.value == _precio, "Payment amount must match the precio.");
         
-        Shipment memory shipment = Shipment(msg.sender, _receiver, _pickupTime, 0, _distance, _price, ShipmentStatus.PENDING, false);
+        Ram memory ram = Ram(msg.sender, _receptor, _fechaCreacion, 0, _ddr, _precio, RamStatus.ENSAMBLADO, false);
 
-        shipments[msg.sender].push(shipment);
-        shipmentCount++;
+        rams[msg.sender].push(ram);
+        ramCount++;
 
-         tyepShipments.push(
-            TyepShipment(
+         typeRams.push(
+            TypeRam(
                 msg.sender, 
-                _receiver, 
-                _pickupTime, 
+                _receptor, 
+                _fechaCreacion, 
                 0, 
-                _distance, 
-                _price, 
-                ShipmentStatus.PENDING, 
+                _ddr, 
+                _precio, 
+                RamStatus.ENSAMBLADO, 
                 false
             )
         );
         
-        emit ShipmentCreated(msg.sender, _receiver, _pickupTime, _distance, _price);
+        emit RamCreated(msg.sender, _receptor, _fechaCreacion, _ddr, _precio);
     }
 
-    function startShipment(address _sender, address _receiver, uint256 _index) public {
-        Shipment storage shipment = shipments[_sender][_index];
-        TyepShipment storage tyepShipment = tyepShipments[_index];
+    function startRam(address _sender, address _receptor, uint256 _index) public {
+        Ram storage ram = rams[_sender][_index];
+        TypeRam storage typeRam = typeRams[_index];
         
-        require(shipment.receiver == _receiver, "Invalid receiver.");
-        require(shipment.status == ShipmentStatus.PENDING, "Shipment already in transit.");
+        require(ram.receptor == _receptor, "Invalid receptor.");
+        require(ram.status == RamStatus.ENSAMBLADO, "ram already in transit.");
 
-        shipment.status = ShipmentStatus.IN_TRANSIT;
-        tyepShipment.status = ShipmentStatus.IN_TRANSIT;
+        ram.status = RamStatus.ENVIADO;
+        typeRam.status = RamStatus.ENVIADO;
 
-        emit ShipmentInTransit(_sender, _receiver, shipment.pickupTime);
+        emit RamInTransit(_sender, _receptor, ram.fechaCreacion);
     }
 
-    function completeShipment(address _sender, address _receiver, uint256 _index) public {
-        Shipment storage shipment = shipments[_sender][_index];
-        TyepShipment storage tyepShipment = tyepShipments[_index];
+    function completeRam(address _sender, address _receptor, uint256 _index) public {
+        Ram storage ram = rams[_sender][_index];
+        TypeRam storage typeRam = typeRams[_index];
 
-        require(shipment.receiver == _receiver, "Invalid receiver.");
-        require(shipment.status == ShipmentStatus.IN_TRANSIT, "Shipment not in transit.");
-        require(!shipment.isPaid, "Shipment already paid.");
+        require(ram.receptor == _receptor, "Invalid receptor.");
+        require(ram.status == RamStatus.ENVIADO, "ram not in transit.");
+        require(!ram.isPaid, "ram already paid.");
 
-         shipment.status = ShipmentStatus.DELIVERED;
-         tyepShipment.status = ShipmentStatus.DELIVERED;
-         tyepShipment.deliveryTime = block.timestamp;
-         shipment.deliveryTime = block.timestamp;
+         ram.status = RamStatus.COMPLETO;
+         typeRam.status = RamStatus.COMPLETO;
+         typeRam.fechaEnvio = block.timestamp;
+         ram.fechaEnvio = block.timestamp;
 
-        uint256 amount = shipment.price;
+        uint256 amount = ram.precio;
 
-        payable(shipment.sender).transfer(amount);
+        payable(ram.sender).transfer(amount);
 
-        shipment.isPaid = true;
-        tyepShipment.isPaid = true;
+        ram.isPaid = true;
+        typeRam.isPaid = true;
 
-        emit ShipmentDelivered(_sender, _receiver, shipment.deliveryTime);
-        emit ShipmentPaid(_sender, _receiver, amount);
+        emit RamDelivered(_sender, _receptor, ram.fechaEnvio);
+        emit RamPaid(_sender, _receptor, amount);
     }
 
-    function getShipment(address _sender, uint256 _index) public view returns (address, address, uint256, uint256, uint256, uint256, ShipmentStatus, bool) {
-        Shipment memory shipment = shipments[_sender][_index];
-        return (shipment.sender, shipment.receiver, shipment.pickupTime, shipment.deliveryTime, shipment.distance, shipment.price, shipment.status, shipment.isPaid);
+    function getRam(address _sender, uint256 _index) public view returns (address, address, uint256, uint256, uint256, uint256, RamStatus, bool) {
+        Ram memory ram = rams[_sender][_index];
+        return (ram.sender, ram.receptor, ram.fechaCreacion, ram.fechaEnvio, ram.ddr, ram.precio, ram.status, ram.isPaid);
     }
 
-    function getShipmentsCount(address _sender) public view returns (uint256) {
-        return shipments[_sender].length;
+    function getRamsCount(address _sender) public view returns (uint256) {
+        return rams[_sender].length;
     }
 
      function getAllTransactions()
         public
         view
-        returns (TyepShipment[] memory)
+        returns (TypeRam[] memory)
     
     {
-        return tyepShipments;
+        return typeRams;
     }
 
    

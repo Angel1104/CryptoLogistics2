@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Str1 } from "../Components/index";
 
-export default ({ startModal, setStartModal, startShipment }) => {
+export default ({ startModal, setStartModal, startRam }) => {
   const [getProduct, setGetProduct] = useState({
-    reveiver: "",
+    receptor: "",
     index: "",
   });
 
   const startShipping = () => {
-    startShipment(getProduct);
+    startRam(getProduct);
   };
   return startModal ? (
     <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -28,7 +28,7 @@ export default ({ startModal, setStartModal, startShipment }) => {
           </div>
           <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
             <h4 className="text-lg font-medium text-gray-800">
-              Start The Shipping
+              Iniciar ensamblaje
             </h4>
 
             <form onSubmit={(e) => e.preventDefault()}>
@@ -40,7 +40,7 @@ export default ({ startModal, setStartModal, startShipment }) => {
                   onChange={(e) =>
                     setGetProduct({
                       ...getProduct,
-                      reveiver: e.target.value,
+                      receptor: e.target.value,
                     })
                   }
                 />
@@ -63,7 +63,7 @@ export default ({ startModal, setStartModal, startShipment }) => {
                 onClick={() => startShipping()}
                 className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg ring-offset-2 ring-indigo-600 focus:ring-2"
               >
-                Get details
+                Confirmar
               </button>
             </form>
           </div>

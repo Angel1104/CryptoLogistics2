@@ -11,7 +11,7 @@ const SideBar = () => {
   const {
     currentUser,
     connectWallet,
-    getShipmentsCount,
+    getRamsCount,
   } = useContext(TrackingContext);
     //STATE VARIABLE
     const [openProfile, setOpenProfile] = useState(false);
@@ -82,7 +82,7 @@ const SideBar = () => {
         openProfile={openProfile}
         setOpenProfile={setOpenProfile}
         currentUser={currentUser}
-        getShipmentsCount={getShipmentsCount}
+        getRamsCount={getRamsCount}
       />
     </aside>
   );

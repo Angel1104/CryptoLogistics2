@@ -1,15 +1,15 @@
 import { useState } from "react";
 
-export default ({ getModel, setGetModel, getShipment }) => {
+export default ({ getModel, setGetModel, getRam }) => {
   const [index, setIndex] = useState(0);
-  const [singleShipmentData, setSingleShipmentData] = useState();
+  const [singleRamData, setSingleRamData] = useState();
 
-  const getshipmentData = async () => {
-    const getData = await getShipment(index);
-    setSingleShipmentData(getData);
+  const getRamData = async () => {
+    const getData = await getRam(index);
+    setSingleRamData(getData);
     console.log(getData);
   };
-  console.log(singleShipmentData);
+  console.log(singleRamData);
 
   const converTime = (time) => {
     const newTime = new Date(time);
@@ -65,29 +65,29 @@ export default ({ getModel, setGetModel, getShipment }) => {
               </div>
 
               <button
-                onClick={() => getshipmentData()}
+                onClick={() => getRamData()}
                 className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg ring-offset-2 ring-indigo-600 focus:ring-2"
               >
                 Ver detalles
               </button>
             </form>
 
-            {singleShipmentData == undefined ? (
+            {singleRamData == undefined ? (
               ""
             ) : (
               <div className="text-left">
-                <p>Sender: {singleShipmentData.sender.slice(0, 25)}...</p>
-                <p>Recevier: {singleShipmentData.receiver.slice(0, 25)}...</p>
-                <p>Fecha: {converTime(singleShipmentData.pickupTime)}</p>
+                <p>Creador: {singleRamData.sender.slice(0, 25)}...</p>
+                <p>Receptor: {singleRamData.receptor.slice(0, 25)}...</p>
+                <p>Fecha Creacion: {converTime(singleRamData.fechaCreacion)}</p>
                 <p>
-                  Fecha Entrega: {converTime(singleShipmentData.deliveryTime)}
+                  Fecha Envio: {converTime(singleRamData.fechaEnvio)}
                 </p>
-                <p>Almacenamiento: {singleShipmentData.distance}</p>
-                <p>Precio: {singleShipmentData.price}</p>
-                <p>Estado: {singleShipmentData.status}</p>
+                <p>DDR: {singleRamData.ddr}</p>
+                <p>Precio: {singleRamData.precio}</p>
+                <p>Estado: {singleRamData.status}</p>
                 <p>
                   Pagado:{" "}
-                  {singleShipmentData.isPaid ? "Completo" : "Incompleto"}
+                  {singleRamData.isPaid ? "Completo" : "Incompleto"}
                 </p>
               </div>
             )}

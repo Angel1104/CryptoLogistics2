@@ -8,14 +8,14 @@ export default ({
   openProfile,
   setOpenProfile,
   currentUser,
-  getShipmentsCount,
+  getRamsCount,
 }) => {
   const [count, setCount] = useState();
   useEffect(() => {
-    const getShipmentsData = getShipmentsCount();
+    const getRamssData = getRamsCount();
 
     return async () => {
-      const allData = await getShipmentsData;
+      const allData = await getRamssData;
       setCount(allData);
     };
   }, []);
@@ -62,17 +62,17 @@ export default ({
               </span>
 
               <div class="flex mt-4 space-x-3 md:mt-6">
-                <a
+                {/* <a
                   href="#"
                   class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-black rounded-lg border-2 "
                 >
                   Balance: 10000 ETH
-                </a>
+                </a> */}
                 <a
                   href="#"
                   class="inline-flex items-center px-4 py-2 text-sm  font-medium text-center text-black rounded-lg border-2 "
                 >
-                  Total RAM vendidas: {count}
+                  Total de productos: {count}
                 </a>
               </div>
             </div>
