@@ -18,9 +18,9 @@ export const TrackingProvider = ({ children }) => {
   const DappName = "Product Tracking Dapp";
   const [currentUser, setCurrentUser] = useState("");
 
-  const createShipment = async (items) => {
+  const createRam = async (items) => {
     console.log(items);
-    const { receiver, pickupTime, distance, price } = items;
+    const { receptor, fechaCreacion, ddr, precio } = items;
 
     try {
       const web3Modal = new Web3Modal();
@@ -28,13 +28,13 @@ export const TrackingProvider = ({ children }) => {
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
       const contract = fetchContract(signer);
-      const createItem = await contract.createShipment(
-        receiver,
-        new Date(pickupTime).getTime(),
-        distance,
-        ethers.utils.parseUnits(price, 18),
+      const createItem = await contract.createRam(
+        receptor,
+        new Date(fechaCreacion).getTime(),
+        ddr,
+        ethers.utils.parseUnits(precio, 18),
         {
-          value: ethers.utils.parseUnits(price, 18),
+          value: ethers.utils.parseUnits(precio, 18),
         }
       );
       await createItem.wait();
@@ -45,30 +45,30 @@ export const TrackingProvider = ({ children }) => {
     }
   };
 
-  const getAllShipment = async () => {
+  const getAllRam = async () => {
     try {
       const provider = new ethers.providers.JsonRpcProvider();
       const contract = fetchContract(provider);
 
-      const shipments = await contract.getAllTransactions();
-      const allShipments = shipments.map((shipment) => ({
-        sender: shipment.sender,
-        receiver: shipment.receiver,
-        price: ethers.utils.formatEther(shipment.price.toString()),
-        pickupTime: shipment.pickupTime.toNumber(),
-        deliveryTime: shipment.deliveryTime.toNumber(),
-        distance: shipment.distance.toNumber(),
-        isPaid: shipment.isPaid,
-        status: shipment.status,
+      const rams = await contract.getAllTransactions();
+      const allRams = rams.map((ram) => ({
+        sender: ram.sender,
+        receptor: ram.receptor,
+        precio: ethers.utils.formatEther(ram.precio.toString()),
+        fechaCreacion: ram.fechaCreacion.toNumber(),
+        fechaEnvio: ram.fechaEnvio.toNumber(),
+        ddr: ram.ddr.toNumber(),
+        isPaid: ram.isPaid,
+        status: ram.status,
       }));
 
-      return allShipments;
+      return allRams;
     } catch (error) {
-      console.log("error want, getting shipment");
+      console.log("error want, getting ram");
     }
   };
 
-  const getShipmentsCount = async () => {
+  const getRamsCount = async () => {
     try {
       if (!window.ethereum) return "Install MetaMask";
 
@@ -77,17 +77,17 @@ export const TrackingProvider = ({ children }) => {
       });
       const provider = new ethers.providers.JsonRpcProvider();
       const contract = fetchContract(provider);
-      const shipmentsCount = await contract.getShipmentsCount(accounts[0]);
-      return shipmentsCount.toNumber();
+      const ramsCount = await contract.getRamsCount(accounts[0]);
+      return ramsCount.toNumber();
     } catch (error) {
-      console.log("error want, getting shipment");
+      console.log("error want, getting ram");
     }
   };
 
-  const completeShipment = async (completeShip) => {
-    console.log(completeShip);
+  const completeRam = async (completeRamm) => {
+    console.log(completeRamm);
 
-    const { recevier, index } = completeShip;
+    const { recevier, index } = completeRamm;
     try {
       if (!window.ethereum) return "Install MetaMask";
 
@@ -100,7 +100,7 @@ export const TrackingProvider = ({ children }) => {
       const signer = provider.getSigner();
       const contract = fetchContract(signer);
 
-      const transaction = await contract.completeShipment(
+      const transaction = await contract.completeRam(
         accounts[0],
         recevier,
         index,
@@ -113,11 +113,11 @@ export const TrackingProvider = ({ children }) => {
       console.log(transaction);
       location.reload();
     } catch (error) {
-      console.log("wrong completeShipment", error);
+      console.log("wrong completeRam", error);
     }
   };
 
-  const getShipment = async (index) => {
+  const getRam = async (index) => {
     console.log(index * 1);
     try {
       if (!window.ethereum) return "Install MetaMask";
@@ -128,17 +128,17 @@ export const TrackingProvider = ({ children }) => {
 
       const provider = new ethers.providers.JsonRpcProvider();
       const contract = fetchContract(provider);
-      const shipment = await contract.getShipment(accounts[0], index * 1);
+      const ram = await contract.getRam(accounts[0], index * 1);
 
       const SingleShiplent = {
-        sender: shipment[0],
-        receiver: shipment[1],
-        pickupTime: shipment[2].toNumber(),
-        deliveryTime: shipment[3].toNumber(),
-        distance: shipment[4].toNumber(),
-        price: ethers.utils.formatEther(shipment[5].toString()),
-        status: shipment[6],
-        isPaid: shipment[7],
+        sender: ram[0],
+        receptor: ram[1],
+        fechaCreacion: ram[2].toNumber(),
+        fechaEnvio: ram[3].toNumber(),
+        ddr: ram[4].toNumber(),
+        precio: ethers.utils.formatEther(ram[5].toString()),
+        status: ram[6],
+        isPaid: ram[7],
       };
 
       return SingleShiplent;
@@ -147,7 +147,7 @@ export const TrackingProvider = ({ children }) => {
     }
   };
 
-  const startShipment = async (getProduct) => {
+  const startRam = async (getProduct) => {
     const { reveiver, index } = getProduct;
 
     try {
@@ -162,7 +162,7 @@ export const TrackingProvider = ({ children }) => {
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
       const contract = fetchContract(signer);
-      const shipment = await contract.startShipment(
+      const ram = await contract.startRam(
         accounts[0],
         reveiver,
         index * 1,
@@ -171,8 +171,8 @@ export const TrackingProvider = ({ children }) => {
         }
       );
 
-      shipment.wait();
-      console.log(shipment);
+      ram.wait();
+      console.log(ram);
       location.reload();
     } catch (error) {
       console.log("Sorry no chipment", error);
@@ -221,12 +221,12 @@ export const TrackingProvider = ({ children }) => {
     <TrackingContext.Provider
       value={{
         connectWallet,
-        createShipment,
-        getAllShipment,
-        completeShipment,
-        getShipment,
-        startShipment,
-        getShipmentsCount,
+        createRam,
+        getAllRam,
+        completeRam,
+        getRam,
+        startRam,
+        getRamsCount,
         DappName,
         currentUser,
       }}
