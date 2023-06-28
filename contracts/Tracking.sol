@@ -44,10 +44,10 @@ contract Tracking {
     event RamEnviada(address indexed sender, address indexed receptor, uint256 fechaCreacion);
 
     event RamAssembled(address indexed sender, address indexed receptor, uint256 fechaCreacion, uint256 ddr, uint256 precio);
-    event RamProgrammed(address indexed sender, address indexed receptor, uint256 fechaCreacion);
+    event RamProgrammed(address indexed sender, address indexed receptor);
     event RamTested(address indexed sender, address indexed receptor);
     event RamPacked(address indexed sender, address indexed receptor);
-    event RamDelivered(address indexed sender, address indexed receptor, uint256 fechaFinal);
+    event RamDelivered(address indexed sender, address indexed receptor, uint256 fechaEnvio);
     event RamPaid(address indexed sender, address indexed receptor, uint256 amount);
 
     constructor() {
@@ -83,12 +83,13 @@ contract Tracking {
         TypeRam storage typeRam = typeRams[_index];
 
         require(ram.receptor == _receptor, "Receptor inexistente.");
-        require(ram.status == RamStatus.PROGRAMADO, "RAM PROGRAMADA.");
+        require(ram.status == RamStatus.ENSAMBLADO, "RAM PROGRAMADA.");
+        
 
         ram.status = RamStatus.PROGRAMADO;
         typeRam.status = RamStatus.PROGRAMADO;
 
-        emit RamProgrammed(_sender, _receptor, ram.fechaCreacion);
+        emit RamProgrammed(_sender, _receptor);
     }
 
     function testRam(address _sender, address _receptor, uint256 _index) public{
@@ -96,7 +97,7 @@ contract Tracking {
         TypeRam storage typeRam = typeRams[_index];
 
         require(ram.receptor == _receptor, "Receptor inexistente.");
-        require(ram.status == RamStatus.PROBADO, "RAM PROGRAMADA.");
+        require(ram.status == RamStatus.PROGRAMADO, "RAM PROGRAMADA.");
 
         ram.status = RamStatus.PROBADO;
         typeRam.status = RamStatus.PROBADO;
@@ -109,7 +110,7 @@ contract Tracking {
         TypeRam storage typeRam = typeRams[_index];
 
         require(ram.receptor == _receptor, "Receptor inexistente.");
-        require(ram.status == RamStatus.EMPACADO, "RAM PROGRAMADA.");
+        require(ram.status == RamStatus.PROBADO, "RAM PROGRAMADA.");
 
         ram.status = RamStatus.EMPACADO;
         typeRam.status = RamStatus.EMPACADO;
@@ -122,7 +123,7 @@ contract Tracking {
         TypeRam storage typeRam = typeRams[_index];
         
         require(ram.receptor == _receptor, "Receptor inexistente.");
-        require(ram.status == RamStatus.ENSAMBLADO, "RAM enviada.");
+        require(ram.status == RamStatus.EMPACADO, "RAM enviada.");
 
         ram.status = RamStatus.ENVIADO;
         typeRam.status = RamStatus.ENVIADO;

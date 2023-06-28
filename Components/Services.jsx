@@ -6,7 +6,7 @@ const Services = ({
   setCreateRamModel,
   setprogrammedModalRam,
   setTestModalRam,
-  setPackedModalRam
+  setPackedModalRam,
 }) => {
 
 

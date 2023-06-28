@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default ({
   setCreateRamModel,
@@ -19,6 +19,15 @@ export default ({
       console.log("Wrong creating item");
     }
   };
+
+  const [currentDate, setCurrentDate] = useState('');
+
+  useEffect(() => {
+    const date = new Date();
+    const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    setCurrentDate(formattedDate);
+  }, []);
+  
   return createRamModel ? (
     <div className="fixed inset-0 z-10 overflow-y-auto">
       <div
@@ -68,9 +77,11 @@ export default ({
                 />
               </div>
               <div className="relative mt-3">
-                <input
+                {/* <input
                   type="date"
                   placeholder="fecha"
+                  //value={currentDate}
+                  //readOnly
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                   onChange={(e) =>
                     setRam({
@@ -78,7 +89,8 @@ export default ({
                       fechaCreacion: e.target.value,
                     })
                   }
-                />
+                /> */}
+                {console.log(currentDate)}
               </div>
               <div className="relative mt-3">
                 <input
@@ -102,6 +114,7 @@ export default ({
                     setRam({
                       ...ram,
                       precio: e.target.value,
+                      fechaCreacion: currentDate
                     })
                   }
                 />

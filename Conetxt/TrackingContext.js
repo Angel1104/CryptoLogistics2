@@ -121,7 +121,10 @@ export const TrackingProvider = ({ children }) => {
     }
   };
 
+
   const programmedRam = async (programmedRamm) => {
+    console.log(programmedRamm);
+
     const { receptor, index } = programmedRamm;
     try {
       if (!window.ethereum) return "Install MetaMask";
@@ -129,27 +132,26 @@ export const TrackingProvider = ({ children }) => {
       const accounts = await window.ethereum.request({
         method: "eth_accounts",
       });
-      
       const web3Modal = new Web3Modal();
       const connection = await web3Modal.connect();
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
       const contract = fetchContract(signer);
-      console.log("aca llego");
-      const programing = await contract.programmedRam(
+
+      const transaction = await contract.programmedRam(
         accounts[0],
         receptor,
         index,
         {
-          gasLimit: 300000,
+          gasLimit: 30000000,
         }
       );
-      console.log("aca llego2");
-      programing.wait();
-      console.log(programing);
+
+      transaction.wait();
+      console.log(transaction);
       location.reload();
     } catch (error) {
-      console.log("wrong programing Ram", error);
+      console.log("wrong programed Ram", error);
     }
   };
 
@@ -333,7 +335,7 @@ export const TrackingProvider = ({ children }) => {
         currentUser,
         programmedRam,
         testRam,
-        packedRam
+        packedRam,
       }}
     >
       {children}

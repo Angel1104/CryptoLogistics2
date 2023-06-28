@@ -10,7 +10,7 @@ import {
     StartRam,
     ProgrammedRam,
     TestRam,
-    PackedRam
+    PackedRam,
   } from "../Components/index";
 import { TrackingContext } from "../Conetxt/TrackingContext";
 
@@ -26,7 +26,7 @@ const IniciarProceso = () => {
         getRamsCount,
         programmedRam,
         testRam,
-        packedRam
+        packedRam,
       } = useContext(TrackingContext);
 
     //STATE VARIABLE
@@ -38,6 +38,7 @@ const IniciarProceso = () => {
   const [programmedModalRam, setprogrammedModalRam] = useState(false);
   const [testModalRam, setTestModalRam] = useState(false);
   const [packedModalRam, setPackedModalRam] = useState(false);
+
   //DATA STATE VARIABLE
   const [allRamsdata, setallRamsdata] = useState();
 

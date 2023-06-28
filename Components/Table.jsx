@@ -67,7 +67,7 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
                   {converTime(ram.fechaEmpaque)}
                 </td> */}
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {converTime(ram.fechaEnvio)}
+                  {ram.fechaEnvio}
                 </td>
                 {/* <td className="px-6 py-4 whitespace-nowrap">
                   {converTime(ram.fechaFinal)}
