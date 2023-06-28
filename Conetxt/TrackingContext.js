@@ -54,21 +54,17 @@ export const TrackingProvider = ({ children }) => {
       const allRams = rams.map((ram) => ({
         sender: ram.sender,
         receptor: ram.receptor,
-        precio: ethers.utils.formatEther(ram.precio.toString()),
         fechaCreacion: ram.fechaCreacion.toNumber(),
         fechaEnvio: ram.fechaEnvio.toNumber(),
         ddr: ram.ddr.toNumber(),
+        precio: ethers.utils.formatEther(ram.precio.toString()),
         isPaid: ram.isPaid,
         status: ram.status,
-        fechaProgramado: ram.fechaProgramado,
-        fechaPrueba : ram.fechaPrueba,
-        fechaEmpaque: ram.fechaEmpaque,
-        fechFinal: ram.fechFinal
       }));
 
       return allRams;
     } catch (error) {
-      console.log("error want, getting ram");
+      console.log("error want, getting all rams");
     }
   };
 
@@ -84,7 +80,7 @@ export const TrackingProvider = ({ children }) => {
       const ramsCount = await contract.getRamsCount(accounts[0]);
       return ramsCount.toNumber();
     } catch (error) {
-      console.log("error want, getting ram");
+      console.log("error want, getting ram count");
     }
   };
 
@@ -247,7 +243,7 @@ export const TrackingProvider = ({ children }) => {
 
       return SingleRam;
     } catch (error) {
-      console.log("Sorry no chipment");
+      console.log("Sorry no ram conseguida");
     }
   };
 
