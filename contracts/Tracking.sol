@@ -131,7 +131,7 @@ contract Tracking {
         emit RamEnviada(_sender, _receptor, ram.fechaCreacion);
     }
 
-    function completeRam(address _sender, address _receptor, uint256 _index, uint256 _fechaFinal) public {
+    function completeRam(address _sender, address _receptor, uint256 _index) public {
         Ram storage ram = rams[_sender][_index];
         TypeRam storage typeRam = typeRams[_index];
 

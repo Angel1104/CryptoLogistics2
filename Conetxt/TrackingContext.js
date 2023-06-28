@@ -252,7 +252,7 @@ export const TrackingProvider = ({ children }) => {
   };
 
   const startRam = async (getProduct) => {
-    const { reveiver, index } = getProduct;
+    const { receptor, index } = getProduct;
 
     try {
       if (!window.ethereum) return "Install MetaMask";
@@ -268,7 +268,7 @@ export const TrackingProvider = ({ children }) => {
       const contract = fetchContract(signer);
       const ram = await contract.startRam(
         accounts[0],
-        reveiver,
+        receptor,
         index * 1,
         {
           gasLimit: 300000,
@@ -279,7 +279,7 @@ export const TrackingProvider = ({ children }) => {
       console.log(ram);
       location.reload();
     } catch (error) {
-      console.log("Sorry no chipment", error);
+      console.log("Sorry no se puede iniciar el envio", error);
     }
   };
   
