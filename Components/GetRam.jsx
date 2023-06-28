@@ -97,7 +97,7 @@ export default ({ getModel, setGetModel, getRam }) => {
                     : "COMPLETO"}</p>
                 <p>
                   Pagado:{" "}
-                  {singleRamData.isPaid ? "COMPLETO" : "INCOMPLETO"}
+                  {singleRamData.isPaid ? "Completo" : "Incompleto"}
                 </p>
               </div>
             )}
