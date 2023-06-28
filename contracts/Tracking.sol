@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 contract Tracking {
-    enum RamStatus { ENSAMBLADO, ENVIADO, COMPLETO, PROGRAMADO, PROBADO, EMPACADO }
+    enum RamStatus { ENSAMBLADO, PROGRAMADO, PROBADO, EMPACADO, ENVIADO, COMPLETO }
 
     struct Ram {
         address sender;
@@ -18,7 +18,6 @@ contract Tracking {
         // uint256 fechaEmpaque;
         // uint256 fechaFinal;
         // uint256 capacidad;
-        // uint256 fecuencia;
     }
 
     mapping(address => Ram[]) public rams;
@@ -38,14 +37,16 @@ contract Tracking {
         // uint256 fechaEmpaque;
         // uint256 fechaFinal;
         // uint256 capacidad;
-        // uint256 fecuencia;
     }
 
     TypeRam[] typeRams;
     
+    event RamEnviada(address indexed sender, address indexed receptor, uint256 fechaCreacion);
 
-    event RamCreated(address indexed sender, address indexed receptor, uint256 fechaCreacion, uint256 ddr, uint256 precio);
-    event RamInTransit(address indexed sender, address indexed receptor, uint256 fechaCreacion);
+    event RamAssembled(address indexed sender, address indexed receptor, uint256 fechaCreacion, uint256 ddr, uint256 precio);
+    event RamProgrammed(address indexed sender, address indexed receptor);
+    event RamTested(address indexed sender, address indexed receptor);
+    event RamPacked(address indexed sender, address indexed receptor);
     event RamDelivered(address indexed sender, address indexed receptor, uint256 fechaEnvio);
     event RamPaid(address indexed sender, address indexed receptor, uint256 amount);
 
@@ -54,7 +55,7 @@ contract Tracking {
     }
 
      function createRam(address _receptor, uint256 _fechaCreacion, uint256 _ddr, uint256 _precio) public payable {
-        require(msg.value == _precio, "Payment amount must match the precio.");
+        require(msg.value == _precio, "El monto del pago debe coincidir con el precio.");
         
         Ram memory ram = Ram(msg.sender, _receptor, _fechaCreacion, 0, _ddr, _precio, RamStatus.ENSAMBLADO, false);
 
@@ -74,29 +75,69 @@ contract Tracking {
             )
         );
         
-        emit RamCreated(msg.sender, _receptor, _fechaCreacion, _ddr, _precio);
+        emit RamAssembled(msg.sender, _receptor, _fechaCreacion, _ddr, _precio);
+    }
+
+    function programmedRam(address _sender, address _receptor, uint256 _index) public{
+        Ram storage ram = rams[_sender][_index];
+        TypeRam storage typeRam = typeRams[_index];
+
+        require(ram.receptor == _receptor, "Receptor inexistente.");
+        require(ram.status == RamStatus.ENSAMBLADO, "RAM PROGRAMADA.");
+        
+
+        ram.status = RamStatus.PROGRAMADO;
+        typeRam.status = RamStatus.PROGRAMADO;
+
+        emit RamProgrammed(_sender, _receptor);
+    }
+
+    function testRam(address _sender, address _receptor, uint256 _index) public{
+        Ram storage ram = rams[_sender][_index];
+        TypeRam storage typeRam = typeRams[_index];
+
+        require(ram.receptor == _receptor, "Receptor inexistente.");
+        require(ram.status == RamStatus.PROGRAMADO, "RAM PROGRAMADA.");
+
+        ram.status = RamStatus.PROBADO;
+        typeRam.status = RamStatus.PROBADO;
+
+        emit RamTested(_sender, _receptor);
+    }
+
+    function packedRam(address _sender, address _receptor, uint256 _index) public{
+        Ram storage ram = rams[_sender][_index];
+        TypeRam storage typeRam = typeRams[_index];
+
+        require(ram.receptor == _receptor, "Receptor inexistente.");
+        require(ram.status == RamStatus.PROBADO, "RAM PROGRAMADA.");
+
+        ram.status = RamStatus.EMPACADO;
+        typeRam.status = RamStatus.EMPACADO;
+
+        emit RamPacked(_sender, _receptor);
     }
 
     function startRam(address _sender, address _receptor, uint256 _index) public {
         Ram storage ram = rams[_sender][_index];
         TypeRam storage typeRam = typeRams[_index];
         
-        require(ram.receptor == _receptor, "Invalid receptor.");
-        require(ram.status == RamStatus.ENSAMBLADO, "ram already in transit.");
+        require(ram.receptor == _receptor, "Receptor inexistente.");
+        require(ram.status == RamStatus.EMPACADO, "RAM enviada.");
 
         ram.status = RamStatus.ENVIADO;
         typeRam.status = RamStatus.ENVIADO;
 
-        emit RamInTransit(_sender, _receptor, ram.fechaCreacion);
+        emit RamEnviada(_sender, _receptor, ram.fechaCreacion);
     }
 
     function completeRam(address _sender, address _receptor, uint256 _index) public {
         Ram storage ram = rams[_sender][_index];
         TypeRam storage typeRam = typeRams[_index];
 
-        require(ram.receptor == _receptor, "Invalid receptor.");
+        require(ram.receptor == _receptor, "Receptor inexistente.");
         require(ram.status == RamStatus.ENVIADO, "ram not in transit.");
-        require(!ram.isPaid, "ram already paid.");
+        require(!ram.isPaid, "Ram proceso completado.");
 
          ram.status = RamStatus.COMPLETO;
          typeRam.status = RamStatus.COMPLETO;

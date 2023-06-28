@@ -1,39 +1,26 @@
 import { useState } from "react";
+import Link from 'next/link';
+export default ({ programmedModalRam, setprogrammedModalRam, programmedRam }) => {
+  const [completeRamm, setCompleteRamm] = useState({
+    receptor: "",
+    index: "",
+  });
 
-export default ({ getModel, setGetModel, getRam }) => {
-  const [index, setIndex] = useState(0);
-  const [singleRamData, setSingleRamData] = useState();
-
-  const getRamData = async () => {
-    const getData = await getRam(index);
-    setSingleRamData(getData);
-    console.log(getData);
+  const changeStatus = async () => {
+    programmedRam(completeRamm);
   };
-  console.log(singleRamData);
-
-  const converTime = (time) => {
-    const newTime = new Date(time);
-    const dataTime = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).format(newTime);
-
-    return dataTime;
-  };
-
-  return getModel ? (
+  return programmedModalRam ? (
     <div className="fixed inset-0 z-10 overflow-y-auto">
       <div
         className="fixed inset-0 w-full h-full bg-black opacity-40"
-        onClick={() => setGetModel(false)}
+        onClick={() => setprogrammedModalRam(false)}
       ></div>
       <div className="flex items-center min-h-screen px-4 py-8">
         <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
           <div className="flex justify-end">
             <button
               className="p-2 text-gray-400 rounded-md hover:bg-gray-100"
-              onClick={() => setGetModel(false)}
+              onClick={() => setprogrammedModalRam(false)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -51,46 +38,44 @@ export default ({ getModel, setGetModel, getRam }) => {
           </div>
           <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
             <h4 className="text-lg font-medium text-gray-800">
-              Seguimento de RAM detalles
+              Programar RAM
             </h4>
 
             <form onSubmit={(e) => e.preventDefault()}>
               <div className="relative mt-3">
                 <input
-                  type="number"
-                  placeholder="Id"
+                  type="text"
+                  placeholder="receptor"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-                  onChange={(e) => setIndex(e.target.value)}
+                  onChange={(e) =>
+                    setCompleteRamm({
+                      ...completeRamm,
+                      receptor: e.target.value,
+                    })
+                  }
+                />
+              </div>
+              <div className="relative mt-3">
+                <input
+                  type="number"
+                  placeholder="ID"
+                  className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                  onChange={(e) =>
+                    setCompleteRamm({
+                      ...completeRamm,
+                      index: e.target.value,
+                    })
+                  }
                 />
               </div>
 
               <button
-                onClick={() => getRamData()}
+                onClick={() => changeStatus()}
                 className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg ring-offset-2 ring-indigo-600 focus:ring-2"
               >
-                Ver detalles
+                Finalizar proceso
               </button>
             </form>
-
-            {singleRamData == undefined ? (
-              ""
-            ) : (
-              <div className="text-left">
-                <p>Creador: {singleRamData.sender.slice(0, 25)}...</p>
-                <p>Receptor: {singleRamData.receptor.slice(0, 25)}...</p>
-                <p>Fecha Creacion: {converTime(singleRamData.fechaCreacion)}</p>
-                <p>
-                  Fecha Envio: {converTime(singleRamData.fechaEnvio)}
-                </p>
-                <p>DDR: {singleRamData.ddr}</p>
-                <p>Precio: {singleRamData.precio}</p>
-                <p>Estado: {singleRamData.status}</p>
-                <p>
-                  Pagado:{" "}
-                  {singleRamData.isPaid ? "Completo" : "Incompleto"}
-                </p>
-              </div>
-            )}
           </div>
         </div>
       </div>

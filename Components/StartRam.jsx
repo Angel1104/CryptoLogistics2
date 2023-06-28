@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Str1 } from "../Components/index";
+import { Str1 } from "./index";
 
 export default ({ startModal, setStartModal, startRam }) => {
   const [getProduct, setGetProduct] = useState({
@@ -28,7 +28,7 @@ export default ({ startModal, setStartModal, startRam }) => {
           </div>
           <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
             <h4 className="text-lg font-medium text-gray-800">
-              Iniciar ensamblaje
+              Iniciar distribucion
             </h4>
 
             <form onSubmit={(e) => e.preventDefault()}>
