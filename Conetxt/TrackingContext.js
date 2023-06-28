@@ -122,8 +122,6 @@ export const TrackingProvider = ({ children }) => {
   };
 
   const programmedRam = async (programmedRamm) => {
-    console.log(programmedRamm);
-
     const { receptor, index } = programmedRamm;
     try {
       if (!window.ethereum) return "Install MetaMask";
@@ -131,13 +129,14 @@ export const TrackingProvider = ({ children }) => {
       const accounts = await window.ethereum.request({
         method: "eth_accounts",
       });
+      
       const web3Modal = new Web3Modal();
       const connection = await web3Modal.connect();
       const provider = new ethers.providers.Web3Provider(connection);
       const signer = provider.getSigner();
       const contract = fetchContract(signer);
-
-      const transaction = await contract.programmedRam(
+      console.log("aca llego");
+      const programing = await contract.programmedRam(
         accounts[0],
         receptor,
         index,
@@ -145,9 +144,9 @@ export const TrackingProvider = ({ children }) => {
           gasLimit: 300000,
         }
       );
-
-      transaction.wait();
-      console.log(transaction);
+      console.log("aca llego2");
+      programing.wait();
+      console.log(programing);
       location.reload();
     } catch (error) {
       console.log("wrong programing Ram", error);
@@ -251,7 +250,7 @@ export const TrackingProvider = ({ children }) => {
   };
 
   const startRam = async (getProduct) => {
-    const { reveiver, index } = getProduct;
+    const { receptor, index } = getProduct;
 
     try {
       if (!window.ethereum) return "Install MetaMask";
@@ -267,7 +266,7 @@ export const TrackingProvider = ({ children }) => {
       const contract = fetchContract(signer);
       const ram = await contract.startRam(
         accounts[0],
-        reveiver,
+        receptor,
         index * 1,
         {
           gasLimit: 300000,

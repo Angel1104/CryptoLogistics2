@@ -3,7 +3,7 @@ import Layout from '../Components/Layout';
 //INTERNAL IMPORT
 import {
   Table,
-  GetShipment,
+  GetRam,
 } from "../Components/index";
 import { TrackingContext } from "../Conetxt/TrackingContext";
 
@@ -55,7 +55,7 @@ const index = () => {
                 setCreateRamModel={setCreateRamModel}
                 allRamsdata={allRamsdata}
             />
-            <GetShipment
+            <GetRam
               getModel={getModel}
               setGetModel={setGetModel}
               getRam={getRam}

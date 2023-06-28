@@ -44,7 +44,7 @@ contract Tracking {
     event RamEnviada(address indexed sender, address indexed receptor, uint256 fechaCreacion);
 
     event RamAssembled(address indexed sender, address indexed receptor, uint256 fechaCreacion, uint256 ddr, uint256 precio);
-    event RamProgrammed(address indexed sender, address indexed receptor);
+    event RamProgrammed(address indexed sender, address indexed receptor, uint256 fechaCreacion);
     event RamTested(address indexed sender, address indexed receptor);
     event RamPacked(address indexed sender, address indexed receptor);
     event RamDelivered(address indexed sender, address indexed receptor, uint256 fechaFinal);
@@ -88,7 +88,7 @@ contract Tracking {
         ram.status = RamStatus.PROGRAMADO;
         typeRam.status = RamStatus.PROGRAMADO;
 
-        emit RamProgrammed(_sender, _receptor);
+        emit RamProgrammed(_sender, _receptor, ram.fechaCreacion);
     }
 
     function testRam(address _sender, address _receptor, uint256 _index) public{
@@ -130,7 +130,7 @@ contract Tracking {
         emit RamEnviada(_sender, _receptor, ram.fechaCreacion);
     }
 
-    function completeRam(address _sender, address _receptor, uint256 _index, uint256 _fechaFinal) public {
+    function completeRam(address _sender, address _receptor, uint256 _index) public {
         Ram storage ram = rams[_sender][_index];
         TypeRam storage typeRam = typeRams[_index];
 

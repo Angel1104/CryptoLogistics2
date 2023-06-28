@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Link from 'next/link';
 export default ({ programmedModalRam, setprogrammedModalRam, programmedRam }) => {
   const [programmedRamm, setprogrammedRamm] = useState({
     receptor: "",
@@ -68,13 +68,14 @@ export default ({ programmedModalRam, setprogrammedModalRam, programmedRam }) =>
                   }
                 />
               </div>
-
+              <Link href="/">
               <button
                 onClick={() => changeStatus()}
                 className="block w-full mt-3 py-3 px-4 font-medium text-sm text-center text-white bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 rounded-lg ring-offset-2 ring-indigo-600 focus:ring-2"
               >
                 Finalizar proceso
               </button>
+              </Link>
             </form>
           </div>
         </div>

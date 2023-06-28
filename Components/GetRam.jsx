@@ -84,7 +84,7 @@ export default ({ getModel, setGetModel, getRam }) => {
                 </p>
                 <p>DDR: {singleRamData.ddr}</p>
                 <p>Precio: {singleRamData.precio}</p>
-                <p>Estado: {singleRamData.status}</p>
+                <p>Estado: {ram.status}</p>
                 <p>
                   Pagado:{" "}
                   {singleRamData.isPaid ? "Completo" : "Incompleto"}
