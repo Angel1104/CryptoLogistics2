@@ -3,9 +3,9 @@ import SideBar from "./SideBar";
 import Form from "./Form";
 import Services from "./Services";
 import Profile from "./Profile";
-import GetRam from "./GetRam";
-import CompleteRam from "./CompleteRam";
-import StartRam from "./StartRam";
+import GetShipment from "./GetShipment";
+import CompleteShipment from "./CompleteShipment";
+import StartShipment from "./StartShipment";
 import Layout from './Layout';
 import ProgrammedRam from './ProgrammedRam';
 import TestRam from './TestRam';
@@ -24,9 +24,9 @@ export {
   Form,
   Services,
   Profile,
-  GetRam,
-  CompleteRam,
-  StartRam,
+  GetShipment,
+  CompleteShipment,
+  StartShipment,
   ProgrammedRam,
   TestRam,
   PackedRam,

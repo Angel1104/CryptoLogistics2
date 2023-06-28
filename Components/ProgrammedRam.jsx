@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Link from 'next/link';
+
 export default ({ programmedModalRam, setprogrammedModalRam, programmedRam }) => {
   const [completeRamm, setCompleteRamm] = useState({
     receptor: "",

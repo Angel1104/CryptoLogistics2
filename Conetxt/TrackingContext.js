@@ -252,7 +252,7 @@ export const TrackingProvider = ({ children }) => {
   };
 
   const startRam = async (getProduct) => {
-    const { receptor, index } = getProduct;
+    const { reveiver, index } = getProduct;
 
     try {
       if (!window.ethereum) return "Install MetaMask";
@@ -268,7 +268,7 @@ export const TrackingProvider = ({ children }) => {
       const contract = fetchContract(signer);
       const ram = await contract.startRam(
         accounts[0],
-        receptor,
+        reveiver,
         index * 1,
         {
           gasLimit: 300000,
