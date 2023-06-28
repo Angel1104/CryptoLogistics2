@@ -279,7 +279,7 @@ export const TrackingProvider = ({ children }) => {
       console.log(ram);
       location.reload();
     } catch (error) {
-      console.log("Sorry no chipment", error);
+      console.log("Sorry no ram enviada", error);
     }
   };
   
