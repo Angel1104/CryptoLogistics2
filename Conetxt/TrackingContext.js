@@ -59,16 +59,12 @@ export const TrackingProvider = ({ children }) => {
         fechaEnvio: ram.fechaEnvio.toNumber(),
         ddr: ram.ddr.toNumber(),
         isPaid: ram.isPaid,
-        status: ram.status,
-        fechaProgramado: ram.fechaProgramado,
-        fechaPrueba : ram.fechaPrueba,
-        fechaEmpaque: ram.fechaEmpaque,
-        fechFinal: ram.fechFinal
+        status: ram.status
       }));
 
       return allRams;
     } catch (error) {
-      console.log("error want, getting ram");
+      console.log("error want, getting all rams");
     }
   };
 
@@ -84,7 +80,7 @@ export const TrackingProvider = ({ children }) => {
       const ramsCount = await contract.getRamsCount(accounts[0]);
       return ramsCount.toNumber();
     } catch (error) {
-      console.log("error want, getting ram");
+      console.log("error want, getting ram count");
     }
   };
 

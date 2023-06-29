@@ -1,7 +1,5 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
 const Table = ({ setCreateRamModel, allRamsdata}) => {
-
   const converTime = (time) => {
     const newTime = new Date(time);
     const dataTime = new Intl.DateTimeFormat("en-US", {
@@ -13,10 +11,62 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
     return dataTime;
   };
 
+  const [searchId, setSearchId] = useState("");
+  const [filteredRams, setFilteredRams] = useState(allRamsdata);
+  const [searchQuery, setSearchQuery] = useState("");
+  
+  const handleSearchQueryChange = (e) => {
+    const { value } = e.target;
+    setSearchQuery(value);
+  };
+  const handleSearch = () => {
+    handleButtonClick
+    var busqueda;
+    if (searchQuery == "ENSAMBLADO") {
+      busqueda = 0
+    }else if(searchQuery == "PROGRAMADO"){
+      busqueda = 1
+    }else if(searchQuery == "ENSAMBLADO"){
+      busqueda = 2
+    }else if(searchQuery == "PROBADO"){
+      busqueda = 3
+    }else if(searchQuery == "ENIVADO"){
+      busqueda = 4
+    }else if(searchQuery == "COMPLETO"){
+      busqueda = 5
+    }
+    if (searchQuery === "") {
+      setFilteredRams(allRamsdata);
+      
+    } else {
+    const filtered = allRamsdata.filter((ram) =>
+    
+      ram.status.toString().includes(busqueda)
+    );
+    setFilteredRams(filtered);
+    }
+  };
+
+  const [isButtonPressed, setIsButtonPressed] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsButtonPressed(true);
+  };
 
   console.log(allRamsdata);
   return (
     <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
+      <input
+      type="text"
+      value={searchQuery}
+      onChange={handleSearchQueryChange}
+      placeholder="Buscar por estado..."
+      className="border border-gray-300 rounded px-4 py-2 focus:outline-none"
+    />
+    <button
+      onClick={handleSearch}
+      className="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+    >BUSCAR</button>
         <table className="w-full table-auto text-sm text-left">
           <thead className="bg-gray-50 text-gray-600 font-medium border-b">
             <tr>
@@ -36,8 +86,8 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
-            {allRamsdata?.map((ram, idx) => (
-              
+            {/* {isButtonPressed?filteredRams?.map : allRamsdata?.map ((ram, idx) => ( */}
+            {filteredRams?.map ((ram, idx) => (
               <tr key={idx}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {allRamsdata.indexOf(ram) }

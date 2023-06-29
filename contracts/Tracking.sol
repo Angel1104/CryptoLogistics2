@@ -13,11 +13,6 @@ contract Tracking {
         uint256 precio;
         RamStatus status;
         bool isPaid;
-        // uint256 fechaProgramado;
-        // uint256 fechaPrueba;
-        // uint256 fechaEmpaque;
-        // uint256 fechaFinal;
-        // uint256 capacidad;
     }
 
     mapping(address => Ram[]) public rams;
@@ -32,11 +27,6 @@ contract Tracking {
         uint256 precio;
         RamStatus status;
         bool isPaid;
-        // uint256 fechaProgramado;
-        // uint256 fechaPrueba;
-        // uint256 fechaEmpaque;
-        // uint256 fechaFinal;
-        // uint256 capacidad;
     }
 
     TypeRam[] typeRams;
