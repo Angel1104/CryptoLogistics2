@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import { TrackingContext } from "../Conetxt/TrackingContext";
 import {useRouter} from 'next/router';
 import Link from 'next/link';
+import Head from 'next/head';
 
 import {Profile} from "../Components/index";
 
@@ -36,10 +37,19 @@ const SideBar = () => {
     }
     return resp
   };
+  const reportes = () => {
+    var resp;
+    if ( path === "/reportes") {
+        resp = true
+    } else {
+        resp = false
+    }
+    return resp
+  };
 
   return (
-    <aside className="bg-gray-800 sm:w-1/3 xl:w-1/5 sm:min-h-screen p-5 flex flex-col">
-      <div>
+    <aside className="bg-gray-800 sm:w-1/3 xl:w-1/5 sm:min-h-screen p-5 flex flex-col ">
+      <div className="mb-6">
         <p className='text-white text-2xl font-black text-center'>CryptoLogistics</p>
       </div>
       <div className="mb-5 mt-9">
@@ -68,13 +78,23 @@ const SideBar = () => {
                 Iniciar proceso
             </Link>
           </li>
+          <li className={reportes() ? "bg-blue-800" : "hover:bg-blue-500 hover:text-gray-800"}>
+            <Link href="/reportes" className="block py-2 px-4 text-white text-xl">
+                Reportes
+            </Link>
+          </li>
       </nav>
       <div className="mt-auto">
         
         <button 
         onClick={()=>setOpenProfile(true)}
-        className=" text-center bg-blue-500 hover:bg-blue-600 text-xl text-white px-4 py-3 w-full">
+        className=" text-center bg-blue-500 hover:bg-blue-600 text-xl text-white px-4 py-3 w-full mb-5">
           Perfil del usuario
+        </button>
+        <button 
+        className=" text-center bg-red-500 hover:bg-red-600 text-xl text-white px-4 py-3 w-full">
+          
+          <Link href="./homea">Cerrar sesion</Link>
         </button>
 
       </div>

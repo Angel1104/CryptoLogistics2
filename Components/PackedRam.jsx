@@ -38,7 +38,7 @@ export default ({ packedModalRam, setPackedModalRam, packedRam }) => {
           </div>
           <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
             <h4 className="text-lg font-medium text-gray-800">
-              Empaquetar RAM
+              Empaquetar producto
             </h4>
 
             <form onSubmit={(e) => e.preventDefault()}>

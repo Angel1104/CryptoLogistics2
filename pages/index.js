@@ -3,7 +3,7 @@ import Layout from '../Components/Layout';
 //INTERNAL IMPORT
 import {
   Table,
-  GetRam,
+  GetShipment,
 } from "../Components/index";
 import { TrackingContext } from "../Conetxt/TrackingContext";
 
@@ -37,25 +37,15 @@ const index = () => {
                     <button 
                     onClick={()=>setGetModel(true)}
                     className=" text-center bg-blue-500 hover:bg-blue-600 text-xl text-white px-4 py-3 ">
-                        Informacion de Ram
+                        Informacion lote de producto
                     </button>
                 </div>
             </div>
-            {/* <div className="flex items-center justify-end mt-9">
-                <input
-                    type="text"
-                    placeholder="Buscar..."
-                    className="border border-gray-300 rounded px-4 py-2 focus:outline-none"
-                />
-                <button className="ml-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                    Buscar
-                </button>
-            </div> */}
             <Table
                 setCreateRamModel={setCreateRamModel}
                 allRamsdata={allRamsdata}
             />
-            <GetRam
+            <GetShipment
               getModel={getModel}
               setGetModel={setGetModel}
               getRam={getRam}

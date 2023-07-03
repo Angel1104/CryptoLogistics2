@@ -5,9 +5,9 @@ import {
     Form,
     Services,
     Profile,
-    CompleteRam,
-    GetRam,
-    StartRam,
+    CompleteShipment,
+    GetShipment,
+    StartShipment,
     ProgrammedRam,
     TestRam,
     PackedRam,
@@ -69,17 +69,17 @@ const IniciarProceso = () => {
             setCreateRamModel={setCreateRamModel}
         />
         
-        <CompleteRam
+        <CompleteShipment
         completeModal={completeModal}
         setCompleteModal={setCompleteModal}
         completeRam={completeRam}
       />
-        <GetRam
+        <GetShipment
         getModel={getModel}
         setGetModel={setGetModel}
         getShipment={getShipment}
       />
-        <StartRam
+        <StartShipment
         startModal={startModal}
         setStartModal={setStartModal}
         startRam={startRam}
@@ -103,7 +103,7 @@ const IniciarProceso = () => {
       <PackedRam
         packedModalRam={packedModalRam}
         setPackedModalRam = {setPackedModalRam}
-        packedRam={packedRam}
+        packedRam = {packedRam}
       />
     </Layout>
     );

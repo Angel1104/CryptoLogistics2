@@ -3,21 +3,17 @@ pragma solidity ^0.8.0;
 
 contract Tracking {
     enum RamStatus { ENSAMBLADO, PROGRAMADO, PROBADO, EMPACADO, ENVIADO, COMPLETO }
+    // enum TypeProduct {RAM, HDD, SDD}
 
     struct Ram {
         address sender;
         address receptor;
         uint256 fechaCreacion;
         uint256 fechaEnvio;
-        uint256 ddr;
-        uint256 precio;
+        uint256 tipo;
+        uint256 cantidad;
         RamStatus status;
         bool isPaid;
-        // uint256 fechaProgramado;
-        // uint256 fechaPrueba;
-        // uint256 fechaEmpaque;
-        // uint256 fechaFinal;
-        // uint256 capacidad;
     }
 
     mapping(address => Ram[]) public rams;
@@ -28,22 +24,17 @@ contract Tracking {
         address receptor;
         uint256 fechaCreacion;
         uint256 fechaEnvio;
-        uint256 ddr;
-        uint256 precio;
+        uint256 tipo;
+        uint256 cantidad;
         RamStatus status;
         bool isPaid;
-        // uint256 fechaProgramado;
-        // uint256 fechaPrueba;
-        // uint256 fechaEmpaque;
-        // uint256 fechaFinal;
-        // uint256 capacidad;
     }
 
     TypeRam[] typeRams;
     
     event RamEnviada(address indexed sender, address indexed receptor, uint256 fechaCreacion);
 
-    event RamAssembled(address indexed sender, address indexed receptor, uint256 fechaCreacion, uint256 ddr, uint256 precio);
+    event RamAssembled(address indexed sender, address indexed receptor, uint256 fechaCreacion, uint256 tipo, uint256 cantidad);
     event RamProgrammed(address indexed sender, address indexed receptor);
     event RamTested(address indexed sender, address indexed receptor);
     event RamPacked(address indexed sender, address indexed receptor);
@@ -54,10 +45,10 @@ contract Tracking {
         ramCount = 0;
     }
 
-     function createRam(address _receptor, uint256 _fechaCreacion, uint256 _ddr, uint256 _precio) public payable {
-        require(msg.value == _precio, "El monto del pago debe coincidir con el precio.");
+     function createRam(address _receptor, uint256 _fechaCreacion, uint256 _tipo, uint256 _cantidad) public payable {
+        require(msg.value == _cantidad, "El monto del pago debe coincidir con el cantidad.");
         
-        Ram memory ram = Ram(msg.sender, _receptor, _fechaCreacion, 0, _ddr, _precio, RamStatus.ENSAMBLADO, false);
+        Ram memory ram = Ram(msg.sender, _receptor, _fechaCreacion, 0, _tipo, _cantidad, RamStatus.ENSAMBLADO, false);
 
         rams[msg.sender].push(ram);
         ramCount++;
@@ -68,14 +59,14 @@ contract Tracking {
                 _receptor, 
                 _fechaCreacion, 
                 0, 
-                _ddr, 
-                _precio, 
+                _tipo, 
+                _cantidad, 
                 RamStatus.ENSAMBLADO, 
                 false
             )
         );
         
-        emit RamAssembled(msg.sender, _receptor, _fechaCreacion, _ddr, _precio);
+        emit RamAssembled(msg.sender, _receptor, _fechaCreacion, _tipo, _cantidad);
     }
 
     function programmedRam(address _sender, address _receptor, uint256 _index) public{
@@ -144,7 +135,7 @@ contract Tracking {
          typeRam.fechaEnvio = block.timestamp;
          ram.fechaEnvio = block.timestamp;
 
-        uint256 amount = ram.precio;
+        uint256 amount = ram.cantidad;
 
         payable(ram.sender).transfer(amount);
 
@@ -157,7 +148,7 @@ contract Tracking {
 
     function getRam(address _sender, uint256 _index) public view returns (address, address, uint256, uint256, uint256, uint256, RamStatus, bool) {
         Ram memory ram = rams[_sender][_index];
-        return (ram.sender, ram.receptor, ram.fechaCreacion, ram.fechaEnvio, ram.ddr, ram.precio, ram.status, ram.isPaid);
+        return (ram.sender, ram.receptor, ram.fechaCreacion, ram.fechaEnvio, ram.tipo, ram.cantidad, ram.status, ram.isPaid);
     }
 
     function getRamsCount(address _sender) public view returns (uint256) {

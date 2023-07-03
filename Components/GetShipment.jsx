@@ -51,7 +51,7 @@ export default ({ getModel, setGetModel, getRam }) => {
           </div>
           <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
             <h4 className="text-lg font-medium text-gray-800">
-              Seguimento de RAM detalles
+              Seguimento de lote de producto
             </h4>
 
             <form onSubmit={(e) => e.preventDefault()}>
@@ -82,8 +82,12 @@ export default ({ getModel, setGetModel, getRam }) => {
                 <p>
                   Fecha Envio: {converTime(singleRamData.fechaEnvio)}
                 </p>
-                <p>DDR: {singleRamData.ddr}</p>
-                <p>Precio: {singleRamData.precio}</p>
+                <p>Tipo de producto: {singleRamData.tipo == 1
+                    ? "RAM"
+                    : singleRamData.tipo == 2
+                    ? "HDD"
+                    : "SDD"}</p>
+                <p>Cantidad del producto: {singleRamData.cantidad}</p>
                 <p>Estado: {singleRamData.status == 0
                     ? "ENSAMBLADO"
                     : singleRamData.status == 1
