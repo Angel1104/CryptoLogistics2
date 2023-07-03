@@ -14,10 +14,6 @@ const Services = ({
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-x-9 gap-y-10 mx-6 ">
       <div 
       className="hover:cursor-pointer h-32 flex flex-col bg-gray-800 drop-shadow hover:drop-shadow-lg hover:opacity-70 mr-5"
-      // style={{ backgroundImage: `url('https://cdn-icons-png.flaticon.com/512/1483/1483645.png')` ,
-      // backgroundSize: "contain",
-      // backgroundPosition: "center",
-      // backgroundRepeat: "no-repeat"}}
       onClick={()=>setCreateRamModel(true)}
       >
         <div className="flex justify-center items-center h-screen">
