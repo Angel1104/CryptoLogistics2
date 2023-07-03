@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+
+
+
+
 const Table = ({ setCreateRamModel, allRamsdata}) => {
   const converTime = (time) => {
     const newTime = new Date(time);
@@ -74,19 +78,14 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
               <th className="py-3 px-6">Creador</th>
               <th className="py-3 px-6">Receptor</th>
               <th className="py-3 px-6">Fecha ensamblaje</th>
-              <th className="py-3 px-6">DDR</th>
-              <th className="py-3 px-6">Precio</th>
-              {/* <th className="py-3 px-6">Fecha programado</th>
-              <th className="py-3 px-6">Fecha empaquetado</th>
-              <th className="py-3 px-6">Fecha pruebas</th> */}
+              <th className="py-3 px-6">Tipo de producto</th>
+              <th className="py-3 px-6">Cantidad</th>
               <th className="py-3 px-6">Fecha envio</th>
-              {/* <th className="py-3 px-6">Fecha final</th> */}
-              <th className="py-3 px-6">Pago</th>
+              {/* <th className="py-3 px-6">Pago</th> */}
               <th className="py-3 px-6">Estado</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
-            {/* {isButtonPressed?filteredRams?.map : allRamsdata?.map ((ram, idx) => ( */}
             {filteredRams?.map ((ram, idx) => (
               <tr key={idx}>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -102,29 +101,21 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
                   {converTime(ram.fechaCreacion)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {ram.ddr} 
+                {ram.tipo == 1
+                    ? "RAM"
+                    : ram.tipo == 2
+                    ? "HDD"
+                    : "SSD"}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {ram.precio}
+                  {parseInt(ram.cantidad) }
                 </td>
-                {/* <td className="px-6 py-4 whitespace-nowrap">
-                  {converTime(ram.fechaProgramado)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {converTime(ram.fechaPrueba)}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {converTime(ram.fechaEmpaque)}
-                </td> */}
                 <td className="px-6 py-4 whitespace-nowrap">
                   {ram.fechaEnvio}
                 </td>
                 {/* <td className="px-6 py-4 whitespace-nowrap">
-                  {converTime(ram.fechaFinal)}
-                </td> */}
-                <td className="px-6 py-4 whitespace-nowrap">
                   {ram.isPaid ? " Si" : "No"}
-                </td>
+                </td> */}
                 <td className="px-6 py-4 whitespace-nowrap">
                 {ram.status == 0
                     ? "ENSAMBLADO"

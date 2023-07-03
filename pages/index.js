@@ -37,7 +37,7 @@ const index = () => {
                     <button 
                     onClick={()=>setGetModel(true)}
                     className=" text-center bg-blue-500 hover:bg-blue-600 text-xl text-white px-4 py-3 ">
-                        Informacion de Ram
+                        Informacion lote de producto
                     </button>
                 </div>
             </div>

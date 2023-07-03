@@ -10,6 +10,7 @@ import Layout from './Layout';
 import ProgrammedRam from './ProgrammedRam';
 import TestRam from './TestRam';
 import PackedRam from './PackedRam';
+import GetProduct from './GetProduct';
 //SVG
 import Nav1 from "./SVG/Nav1";
 import Nav2 from "./SVG/Nav2";
@@ -30,6 +31,7 @@ export {
   ProgrammedRam,
   TestRam,
   PackedRam,
+  GetProduct,
   Layout,
   //SVG
   Nav1,

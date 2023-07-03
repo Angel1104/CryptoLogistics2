@@ -51,7 +51,7 @@ export default ({ getModel, setGetModel, getRam }) => {
           </div>
           <div className="max-w-sm mx-auto py-3 space-y-3 text-center">
             <h4 className="text-lg font-medium text-gray-800">
-              Seguimento de lote de producto
+              Informacion del producto
             </h4>
 
             <form onSubmit={(e) => e.preventDefault()}>
@@ -76,18 +76,12 @@ export default ({ getModel, setGetModel, getRam }) => {
               ""
             ) : (
               <div className="text-left">
-                <p>Creador: {singleRamData.sender.slice(0, 25)}...</p>
-                <p>Receptor: {singleRamData.receptor.slice(0, 25)}...</p>
                 <p>Fecha Creacion: {converTime(singleRamData.fechaCreacion)}</p>
-                <p>
-                  Fecha Envio: {converTime(singleRamData.fechaEnvio)}
-                </p>
                 <p>Tipo de producto: {singleRamData.tipo == 1
                     ? "RAM"
                     : singleRamData.tipo == 2
                     ? "HDD"
                     : "SDD"}</p>
-                <p>Cantidad del producto: {singleRamData.cantidad}</p>
                 <p>Estado: {singleRamData.status == 0
                     ? "ENSAMBLADO"
                     : singleRamData.status == 1
@@ -102,6 +96,10 @@ export default ({ getModel, setGetModel, getRam }) => {
                 <p>
                   Pagado:{" "}
                   {singleRamData.isPaid ? "Completo" : "Incompleto"}
+                </p>
+                <p>
+                  Garantia:{" "}
+                  {singleRamData.isPaid ? "Activada" : "Sin activar"}
                 </p>
               </div>
             )}

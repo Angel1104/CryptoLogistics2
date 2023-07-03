@@ -8,8 +8,8 @@ export default ({
   const [ram, setRam] = useState({
     receptor: "",
     fechaCreacion: "",
-    ddr: "",
-    precio: "",
+    tipo: "",
+    cantidad: "",
   });
 
   const createItem = async () => {
@@ -77,43 +77,49 @@ export default ({
                 />
               </div>
               <div className="relative mt-3">
-                {/* <input
-                  type="date"
-                  placeholder="fecha"
-                  //value={currentDate}
-                  //readOnly
-                  className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-                  onChange={(e) =>
-                    setRam({
-                      ...ram,
-                      fechaCreacion: e.target.value,
-                    })
-                  }
-                /> */}
+              
                 {console.log(currentDate)}
               </div>
-              <div className="relative mt-3">
+              {/* <div className="relative mt-3">
                 <input
                   type="text"
-                  placeholder="DDR"
+                  placeholder="TIPO DE RAM"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                   onChange={(e) =>
                     setRam({
                       ...ram,
-                      ddr: e.target.value,
+                      tipo: e.target.value,
                     })
                   }
                 />
+              </div> */}
+              <div className="relative mt-3">
+                <select
+                  value={ram.tipo}
+                  onChange={(e) =>
+                    setRam({
+                      ...ram,
+                      tipo: e.target.value,
+                    })
+                  }
+                  className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+                >
+                  <option disabled value="">Selecciona un tipo de producto</option>
+                  <option value="1">RAM</option>
+                  <option value="2">HDD</option>
+                  <option value="3">SSD</option>
+                </select>
+                
               </div>
               <div className="relative mt-3">
                 <input
                   type="text"
-                  placeholder="precio"
+                  placeholder="Cantidad"
                   className="w-full pl-5 pr-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
                   onChange={(e) =>
                     setRam({
                       ...ram,
-                      precio: e.target.value,
+                      cantidad: e.target.value,
                       fechaCreacion: currentDate
                     })
                   }

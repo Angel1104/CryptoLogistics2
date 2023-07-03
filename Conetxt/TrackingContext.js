@@ -20,7 +20,7 @@ export const TrackingProvider = ({ children }) => {
 
   const createRam = async (items) => {
     console.log(items);
-    const { receptor, fechaCreacion, ddr, precio } = items;
+    const { receptor, fechaCreacion, tipo, cantidad } = items;
 
     try {
       const web3Modal = new Web3Modal();
@@ -31,10 +31,10 @@ export const TrackingProvider = ({ children }) => {
       const createItem = await contract.createRam(
         receptor,
         new Date(fechaCreacion).getTime(),
-        ddr,
-        ethers.utils.parseUnits(precio, 18),
+        tipo,
+        ethers.utils.parseUnits(cantidad, 18),
         {
-          value: ethers.utils.parseUnits(precio, 18),
+          value: ethers.utils.parseUnits(cantidad, 18),
         }
       );
       await createItem.wait();
@@ -54,10 +54,10 @@ export const TrackingProvider = ({ children }) => {
       const allRams = rams.map((ram) => ({
         sender: ram.sender,
         receptor: ram.receptor,
-        precio: ethers.utils.formatEther(ram.precio.toString()),
+        cantidad: ethers.utils.formatEther(ram.cantidad.toString()),
         fechaCreacion: ram.fechaCreacion.toNumber(),
         fechaEnvio: ram.fechaEnvio.toNumber(),
-        ddr: ram.ddr.toNumber(),
+        tipo: ram.tipo.toNumber(),
         isPaid: ram.isPaid,
         status: ram.status
       }));
@@ -235,8 +235,8 @@ export const TrackingProvider = ({ children }) => {
         receptor: ram[1],
         fechaCreacion: ram[2].toNumber(),
         fechaEnvio: ram[3].toNumber(),
-        ddr: ram[4].toNumber(),
-        precio: ethers.utils.formatEther(ram[5].toString()),
+        tipo: ram[4].toNumber(),
+        cantidad: ethers.utils.formatEther(ram[5].toString()),
         status: ram[6],
         isPaid: ram[7],
       };
