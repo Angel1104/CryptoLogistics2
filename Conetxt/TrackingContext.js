@@ -276,6 +276,7 @@ export const TrackingProvider = ({ children }) => {
       location.reload();
     } catch (error) {
       console.log("Sorry no se puede iniciar el envio", error);
+
     }
   };
   
