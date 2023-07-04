@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@heroicons/react": "^1.0.6",
     "@next/font": "13.2.4",
     "chart.js": "^4.3.0",
     "ethers": "^5.7.2",

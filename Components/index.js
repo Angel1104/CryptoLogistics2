@@ -11,6 +11,7 @@ import ProgrammedRam from './ProgrammedRam';
 import TestRam from './TestRam';
 import PackedRam from './PackedRam';
 import GetProduct from './GetProduct';
+import Pasos from './Pasos';
 //SVG
 import Nav1 from "./SVG/Nav1";
 import Nav2 from "./SVG/Nav2";
@@ -32,6 +33,7 @@ export {
   TestRam,
   PackedRam,
   GetProduct,
+  Pasos,
   Layout,
   //SVG
   Nav1,

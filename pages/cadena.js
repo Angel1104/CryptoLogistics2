@@ -1,49 +1,37 @@
 import React, { useState, useEffect, useContext } from "react";
 import Layout from '../Components/Layout';
-import { GetShipment } from "../Components/index";
+import  {Pasos}  from "../Components/index";
 import { TrackingContext } from "../Conetxt/TrackingContext";
-import VariableMarker from '../Components/VariableMarker';
 const Cadena = () => {
-  const { getAllRam, getShipment } = useContext(TrackingContext);
+  const {
+    getAllRam,
+    getRam,
+  } = useContext(TrackingContext);
 
-  // STATE VARIABLES
-  const [getModel, setGetModel] = useState(false);
-  const [allRamsdata, setallRamsdata] = useState();
+//DATA STATE VARIABLE
+const [allRamsdata, setallRamsdata] = useState();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const allData = await getAllRam();
-      setallRamsdata(allData);
-    };
+useEffect(() => {
+  const getCampaignsData = getAllRam();
 
-    fetchData();
-  }, []);
-
-  const [variableValue, setVariableValue] = useState(1);
-  const handleChangeValue = () => {
-    // Simular el cambio de valor de la variable
-    setVariableValue((prevValue) => (prevValue === 6 ? 1 : prevValue + 1));
+  return async () => {
+    const allData = await getCampaignsData;
+    setallRamsdata(allData);
   };
-
+}, []);
   return (
     <Layout>
-      <h1 className="text-center text-2xl text-gray-800 font-light mb-4">
+      <h1 className="text-center text-2xl text-gray-800 font-bold mb-4">
         CADENA DE SUMINISTRO
       </h1>
+      <p className="text-center text-2xl text-gray-800 font-light mb-4">Ingresa el ID de un lote de productos o de un producto para saber en que proceso se encuentra dentro la cadena de suministros</p>
+      <div className="flex">
 
-      <GetShipment
-        getModel={getModel}
-        setGetModel={setGetModel}
-        getShipment={getShipment}
-      />
-        
-      <VariableMarker value={variableValue} />
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-4 rounded"
-        onClick={handleChangeValue}
-      >
-        Siguiente Estado
-      </button>
+      <Pasos
+              getRam={getRam}
+      ></Pasos>
+      
+    </div>
     </Layout>
   );
 };
