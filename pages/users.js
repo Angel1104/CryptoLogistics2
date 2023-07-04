@@ -46,7 +46,7 @@ const admin = () => {
               Bienvenido a Crypto Logistics
             </h1>
             <p className="text-gray-700 mb-6 text-center">
-              Software para el control de productos en una cadena de suministros usando blockchain
+              Software para el control de productos en una cadena de suministros aplicando blockchain
             </p>
           </div>
           <div

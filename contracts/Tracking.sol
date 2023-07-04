@@ -3,7 +3,6 @@ pragma solidity ^0.8.0;
 
 contract Tracking {
     enum RamStatus { ENSAMBLADO, PROGRAMADO, PROBADO, EMPACADO, ENVIADO, COMPLETO }
-    // enum TypeProduct {RAM, HDD, SDD}
 
     struct Ram {
         address sender;
