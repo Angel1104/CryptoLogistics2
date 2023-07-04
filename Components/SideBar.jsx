@@ -46,6 +46,15 @@ const SideBar = () => {
     }
     return resp
   };
+  const cadena = () => {
+    var resp;
+    if ( path === "/cadena") {
+        resp = true
+    } else {
+        resp = false
+    }
+    return resp
+  };
 
   return (
     <aside className="bg-gray-800 sm:w-1/3 xl:w-1/5 sm:min-h-screen p-5 flex flex-col ">
@@ -81,6 +90,11 @@ const SideBar = () => {
           <li className={reportes() ? "bg-blue-800" : "hover:bg-blue-500 hover:text-gray-800"}>
             <Link href="/reportes" className="block py-2 px-4 text-white text-xl">
                 Reportes
+            </Link>
+          </li>
+          <li className={cadena() ? "bg-blue-800" : "hover:bg-blue-500 hover:text-gray-800"}>
+            <Link href="/cadena" className="block py-2 px-4 text-white text-xl">
+                Cadena de suministros
             </Link>
           </li>
       </nav>
