@@ -15,7 +15,6 @@ const Table = ({ setCreateRamModel, allRamsdata}) => {
     return dataTime;
   };
 
-  const [searchId, setSearchId] = useState("");
   const [filteredRams, setFilteredRams] = useState(allRamsdata);
   const [searchQuery, setSearchQuery] = useState("");
   

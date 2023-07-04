@@ -18,7 +18,7 @@ const admin = () => {
         </div>
         <div className="w-full md:w-1/2 md:pr-6 flex flex-col justify-center ">
           <h1 className="text-3xl font-bold mb-4 text-center">Bienvenido a Crypto Logistics</h1>
-          <p className="text-gray-700 mb-6 text-center">Software para el control de productos en una cadena de sumistros usando blockchain</p>
+          <p className="text-gray-700 mb-6 text-center">Software para el control de productos en una cadena de sumistros aplicando blockchain</p>
           <Link href="/" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-colors duration-300 text-center">
             Comenzar
           </Link>
